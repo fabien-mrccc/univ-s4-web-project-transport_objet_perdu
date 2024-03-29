@@ -1,0 +1,13 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.logo img {
+    height: 10em;
+}

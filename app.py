@@ -8,6 +8,6 @@ app = Flask(__name__)
 #      GET ROUTES      #
 ########################
 
-@app.route('/')
+@app.get('/')
 def home(): 
-    render_template('accueil.html')
+    return render_template('accueil.html')
