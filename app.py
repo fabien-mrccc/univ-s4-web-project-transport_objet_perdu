@@ -11,3 +11,11 @@ app = Flask(__name__)
 @app.get('/')
 def home(): 
     return render_template('accueil.html')
+
+@app.get('/recuperer-objet-perdu')
+def recover_lost_object():
+    return render_template('recuperer_objet_perdu.html')
+
+@app.get('/ma-compagnie-de-transport')
+def my_transport_company():
+    return render_template('ma_compagnie_de_transport.html')

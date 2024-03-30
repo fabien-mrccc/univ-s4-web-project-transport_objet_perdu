@@ -1,13 +1,117 @@
-body {
+:root {
+    --blue: #3b71d0;
+    --red: #ed4f35;
+    --gray: gray;
+}
+
+body, html {
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
 header {
-    background-color: rgb(255, 255, 255);
     text-align: center;
+    margin-bottom: 10px;
+}
+
+footer {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: var(--gray);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.blue-box-shadow {
+    box-shadow: 6px 6px var(--blue);
+}
+
+.blue-box-shadow:hover {
+    box-shadow: 6px 6px var(--blue);
+}
+
+.blue-box-shadow:active {
+    box-shadow: 3px 3px var(--blue);
+}
+
+.red-box-shadow {
+    box-shadow: 6px 6px var(--red);
+}
+
+.red-box-shadow:hover {
+    box-shadow: 6px 6px var(--red);
+}
+
+.red-box-shadow:active {
+    box-shadow: 3px 3px var(--red);
 }
 
 .logo img {
     height: 10em;
+    margin-top: 20px;
+    border-radius: 100px;
+    border: 3px solid var(--blue);
+    box-shadow: 2px 2px var(--blue);
+}
+
+.logo img:hover {
+    box-shadow: 2px 2px var(--red);
+}
+
+.logo img:active {
+    box-shadow: 0px 0px var(--red);
+}
+
+.home-buttons {
+    height: 70%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.home-button {
+    height: 50vh; 
+    width: 40vw;
+    font-size: 40px;
+    font-weight: 500;
+    padding: 3vw;
+    margin: 20px;
+}
+
+.home-button:hover {
+    cursor: pointer;
+}
+
+button {
+    border: 3px solid black;
+    border-radius: 20px;
+}
+
+.left-button {
+    background-color: var(--blue);
+    color: white;
+}
+
+.right-button {
+    background-color: var(--red);
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .home-buttons {
+        height: auto;
+        flex-direction: column; 
+    }
+
+    .home-button {
+        width: 80vw;
+        font-size: 30px;
+    }
+
+    footer {
+        font-size: 10px;
+    }
 }
