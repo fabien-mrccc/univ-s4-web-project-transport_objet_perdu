@@ -1,3 +1,21 @@
 {% include "header.html" %}
-    Récupérer mon objet perdu
+    <div class="recovery-page">
+        <h2>RÉCUPÉRER MON OBJET PERDU</h2>
+        <div class="recovery-form">
+            <h2>Formulaire de recherche :</h2>
+            <form action="/recuperer-objet-perdu" method="post">
+                <label for="city">Ville :</label><br>
+                <input type="text" id="city" name="city"><br><br>
+
+                <label for="postal_code">Code postal :</label><br>
+                <input type="text" id="postal_code" name="postal_code"><br><br>
+
+                <label for="company_name">Nom de la compagnie :</label><br>
+                <input type="text" id="company_name" name="company_name"><br><br>
+            
+                <button class="form-button " id="recovery-form-button" type="submit">Soumettre</button>
+            </form>
+        </div>
+    </div>
+
 {% include "footer.html" %}
