@@ -19,3 +19,7 @@ def recover_lost_object():
 @app.get('/ma-compagnie-de-transport')
 def my_transport_company():
     return render_template('ma_compagnie_de_transport.html')
+
+@app.get('/connexion-compagnie-transport')
+def login():
+    return render_template('connexion_compagnie_transport.html')
