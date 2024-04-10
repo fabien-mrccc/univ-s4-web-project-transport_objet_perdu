@@ -195,6 +195,7 @@ h2 {
     background-color: var(--red);
     color: white;
     font-size: 25px;
+    margin: 20px;
 }
 
 .basic-form form, .sub-form div{
@@ -234,7 +235,7 @@ input[type="text"] {
 #        RESPONSIVE      #
 ########################*/
 
-@media (max-width: 600px) {
+@media (max-width: 850px) {
     .home-buttons {
         height: auto;
         flex-direction: column; 
@@ -249,6 +250,20 @@ input[type="text"] {
     footer {
         font-size: 10px;
     }
+
+    .sub-form-container {
+        flex-direction: column;
+    }
+
+    .h2-container {
+        flex-direction: column;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .regi
 }
 
 /*########################
