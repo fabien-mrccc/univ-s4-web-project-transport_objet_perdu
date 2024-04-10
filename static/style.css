@@ -195,6 +195,7 @@ h2 {
     background-color: var(--red);
     color: white;
     font-size: 25px;
+    margin: 20px;
 }
 
 .basic-form form, .sub-form div{
@@ -228,6 +229,41 @@ input[type="text"] {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     font-weight: 600;
+}
+
+/*########################
+#        RESPONSIVE      #
+########################*/
+
+@media (max-width: 850px) {
+    .home-buttons {
+        height: auto;
+        flex-direction: column; 
+        margin-bottom: 50px;
+    }
+
+    .home-button {
+        width: 80vw;
+        font-size: 30px;
+    }
+
+    footer {
+        font-size: 10px;
+    }
+
+    .sub-form-container {
+        flex-direction: column;
+    }
+
+    .h2-container {
+        flex-direction: column;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .regi
 }
 
 /*########################
