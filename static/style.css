@@ -1,3 +1,7 @@
+/*########################
+#     GLOBAL ASPECTS     #
+########################*/
+
 :root {
     --blue: #3b71d0;
     --brightblue: #7398d7;
@@ -12,20 +16,68 @@ body, html {
     height: 100%;
 }
 
+/*BEGIN HEADER*/
 header {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
-footer {
+.logo img {
+    height: 10em;
     margin-top: 20px;
-    margin-bottom: 10px;
+    border-radius: 100px;
+    border: 3px solid var(--blue);
+    box-shadow: 2px 2px var(--blue);
+}
+
+.logo img:hover {
+    box-shadow: 2px 2px var(--red);
+}
+
+.logo img:active {
+    box-shadow: 0px 0px var(--red);
+}
+/* END HEADER*/
+
+footer {
+    height: 50px;
     color: var(--gray);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 15px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
+
+/*########################
+#         BUTTONS        #
+########################*/
+
+button {
+    border: 3px solid black;
+    color: white;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.blue-button {
+    background-color: var(--blue);
+}
+
+.red-button {
+    background-color: var(--red);
+}
+
+/*########################
+#         SHADOWS        #
+########################*/
 
 .blue-box-shadow {
     box-shadow: 6px 6px var(--blue);
@@ -51,21 +103,9 @@ footer {
     box-shadow: 3px 3px var(--red);
 }
 
-.logo img {
-    height: 10em;
-    margin-top: 20px;
-    border-radius: 100px;
-    border: 3px solid var(--blue);
-    box-shadow: 2px 2px var(--blue);
-}
-
-.logo img:hover {
-    box-shadow: 2px 2px var(--red);
-}
-
-.logo img:active {
-    box-shadow: 0px 0px var(--red);
-}
+/*########################
+#        HOME PAGE       #
+########################*/
 
 .home-buttons {
     height: 70%;
@@ -81,116 +121,87 @@ footer {
     font-weight: 500;
     padding: 3vw;
     margin: 20px;
-}
-
-.home-button:hover {
-    cursor: pointer;
-}
-
-button {
-    border: 3px solid black;
     border-radius: 20px;
 }
 
-.left-button {
-    background-color: var(--blue);
-    color: white;
-}
+/*########################
+#     MAIN CONTAINER     #
+########################*/
 
-.right-button {
-    background-color: var(--red);
-    color: white;
-}
-
-@media (max-width: 600px) {
-    .home-buttons {
-        height: auto;
-        flex-direction: column; 
-    }
-
-    .home-button {
-        width: 80vw;
-        font-size: 30px;
-    }
-
-    footer {
-        font-size: 10px;
-    }
-}
-
-.form-page {
+.main-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
     background-color: var(--brightred);
+    padding: 30px;
 }
 
-.form {
+.h2-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+    height: 15%;
+    background-color: var(--blue);
+    padding: 0 15px 0 15px;
+    color: var(--brightred);
+}
+
+h2 {
+    font-size: 50px;
+}
+
+/*########################
+#      GENERAL FORM      #
+########################*/
+
+.basic-form {
+    height: 75%;
+    width:350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border-radius: 20px;
     background-color: var(--red);
     color: white;
+    font-size: 25px;
 }
 
-.form-button {
-    margin-top: 20px;
-    height: 50px;
-    width: 100%;
-    border-radius: 5px;
-    border-color: var(--blue);
-    background-color: var(--blue);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 17px;
-    color: white;
-    cursor: pointer;
+.basic-form form {
+    width : 80%;
 }
 
-.form-button:hover {
-    border-color: white;
-    background-color: white;
-    color: var(--blue);
-}
-
-.recovery-page {
-    height: 60%;
-}
-
-.recovery-form {
-    height: 75%;
-    width:350px;
-}
-
-.form label {
-    font-size: 15px;
-}
-
-.recovery-form input {
-    width : 280px;
-}
-
-.form input {
+.basic-form input {
+    margin-top: 10px;
+    width : 100%;
+    height: 20px;
     background-color: var(--brightred) ;
     border-color: black;
     border-width: 1px;
     border-style: solid;
 }
 
-.company-page {
-    height: 120%;
+input[type="text"] {
+    font-size: 18px;
 }
 
-.company-form {
-    height: 85%;
-    width:500px;
+.button-container {
+    margin: 10px 0 10px 0;
+    height: 40px;
+    display: flex;
+    justify-content: center;
 }
 
-.company-form input {
-    width : 360px;
+.button-container button {
+    border-radius: 7px;
+    background-color: var(--blue);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
 }
+
+/*########################
+#           END          #
+########################*/
