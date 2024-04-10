@@ -149,6 +149,7 @@ button:hover {
     padding: 0 15px 0 15px;
     color: var(--brightred);
     margin: 30px;
+    border-radius: 20px;
 }
 
 h2 {
@@ -169,7 +170,7 @@ h2 {
     width: 350px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     border-radius: 20px;
     background-color: var(--red);
