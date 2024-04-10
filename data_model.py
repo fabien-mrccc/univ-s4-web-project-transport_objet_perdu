@@ -43,3 +43,8 @@ def db_update(query, args=(), db_name=DBFILENAME):
     conn.commit()
     return cur.rowcount
   
+def save_contact(company_id, city_id, phone, address, contact_page):
+    db_run("""
+           UPDATE InformationsDeContact SET Tel=?, Adresse=?, PageContact=? 
+           WHERE CompagnieDeTransport_ID=? AND Ville_ID=?;""" 
+           (phone, address, contact_page, company_id, city_id))
