@@ -118,19 +118,16 @@ button {
     }
 }
 
-.recovery-page {
+.form-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
-    height: 60%;
     background-color: var(--brightred);
 }
 
-.recovery-form {
-    height: 75%;
-    width:350px;
+.form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -142,24 +139,9 @@ button {
     color: white;
 }
 
-.recovery-form label {
-    font-size: 15px;
-}
-
-.recovery-form input {
-    width : 280px;
-}
-
-.recovery-form input {
-    background-color: var(--brightred) ;
-    border-color: black;
-    border-width: 1px;
-    border-style: solid;
-}
-
 .form-button {
     margin-top: 20px;
-    height: 20%;
+    height: 50px;
     width: 100%;
     border-radius: 5px;
     border-color: var(--blue);
@@ -174,4 +156,41 @@ button {
     border-color: white;
     background-color: white;
     color: var(--blue);
+}
+
+.recovery-page {
+    height: 60%;
+}
+
+.recovery-form {
+    height: 75%;
+    width:350px;
+}
+
+.form label {
+    font-size: 15px;
+}
+
+.recovery-form input {
+    width : 280px;
+}
+
+.form input {
+    background-color: var(--brightred) ;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.company-page {
+    height: 120%;
+}
+
+.company-form {
+    height: 85%;
+    width:500px;
+}
+
+.company-form input {
+    width : 360px;
 }
