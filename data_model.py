@@ -48,3 +48,6 @@ def save_contact(company_id, city_id, phone, address, contact_page):
            UPDATE InformationsDeContact SET Tel=?, Adresse=?, PageContact=? 
            WHERE CompagnieDeTransport_ID=? AND Ville_ID=?;""" 
            (phone, address, contact_page, company_id, city_id))
+    
+def delete_account(company_id):
+  db_run("DELETE FROM CompagnieDeTransport WHERE ID=?", (company_id))
