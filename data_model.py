@@ -4,7 +4,8 @@ import math
 
 DBFILENAME = 'companies.sqlite'
 
-# Utility functions
+# BEGIN Utility functions
+#
 def db_fetch(query, args=(), all=False, db_name=DBFILENAME):
   with sqlite3.connect(db_name) as conn:
     # to allow access to columns by name in res
@@ -29,20 +30,20 @@ def db_insert(query, args=(), db_name=DBFILENAME):
     conn.commit()
     return cur.lastrowid
 
-
 def db_run(query, args=(), db_name=DBFILENAME):
   with sqlite3.connect(db_name) as conn:
     cur = conn.execute(query, args)
     conn.commit()
     return cur
 
-
 def db_update(query, args=(), db_name=DBFILENAME):
   with sqlite3.connect(db_name) as conn:
     cur = conn.execute(query, args)
     conn.commit()
     return cur.rowcount
-  
+#  
+# END Utility functions
+
 def save_contact(company_id, city_id, phone, address, contact_page):
     db_run("""
            UPDATE InformationsDeContact SET Tel=?, Adresse=?, PageContact=? 
