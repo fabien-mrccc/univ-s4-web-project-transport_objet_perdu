@@ -27,3 +27,12 @@ def login():
 @app.get('/inscription-compagnie-transport')
 def sign_up():
     return render_template('inscription_compagnie_transport.html')
+
+########################
+#      POST ROUTES     #
+########################
+
+"""
+@app.post('/delete-account')
+def delete_account():
+"""
