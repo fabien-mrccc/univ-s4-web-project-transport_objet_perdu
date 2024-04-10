@@ -77,7 +77,7 @@ button:hover {
     background-color: var(--red);
 }
 
-.disconnect-button {
+.h2-button {
     font-size: 20px;
     margin: 20px;
     border-radius: 5px;
