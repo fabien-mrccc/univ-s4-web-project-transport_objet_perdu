@@ -77,7 +77,7 @@ button:hover {
     background-color: var(--red);
 }
 
-.h2-button {
+.simple-size-button {
     font-size: 20px;
     margin: 20px;
     border-radius: 5px;
@@ -85,8 +85,13 @@ button:hover {
 }
 
 /*########################
-#         SHADOWS        #
+#  SHADOWS AND HR(LINES) #
 ########################*/
+
+hr {
+    width: 80vw;
+    margin-top: 20px;
+}
 
 .blue-box-shadow {
     box-shadow: 6px 6px var(--blue);
@@ -262,8 +267,6 @@ input[type="text"] {
     h2 {
         text-align: center;
     }
-
-    .regi
 }
 
 /*########################
