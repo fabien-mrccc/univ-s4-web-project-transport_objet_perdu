@@ -7,12 +7,14 @@ function main() {
     let leftHomeButton = document.getElementById('leftHomeButton');
     let rightHomeButton = document.getElementById('rightHomeButton');
     let disconnectButton = document.getElementById('disconnectButton');
-    let signUpButton = document.getElementById('signUpButton');
+    let registerButton = document.getElementById('registerButton');
+    let loginButton = document.getElementById('loginButton');
 
     buttonEventListener(leftHomeButton, "/recuperer-objet-perdu");
     buttonEventListener(rightHomeButton, "/ma-compagnie-de-transport");
     buttonEventListener(disconnectButton, "/deconnexion-compagnie-transport", true);
-    buttonEventListener(signUpButton, "/inscription-compagnie-transport");
+    buttonEventListener(registerButton, "/inscription-compagnie-transport");
+    buttonEventListener(loginButton, "/connexion-compagnie-transport");
 }
 
 function buttonEventListener(button, page, isPost = false) {
