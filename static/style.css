@@ -62,6 +62,7 @@ footer {
 button {
     border: 3px solid black;
     color: white;
+    font-weight: 500;
 }
 
 button:hover {
@@ -74,6 +75,13 @@ button:hover {
 
 .red-button {
     background-color: var(--red);
+}
+
+.disconnect-button {
+    font-size: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 /*########################
@@ -119,7 +127,6 @@ button:hover {
     height: 50vh; 
     width: 40vw;
     font-size: 40px;
-    font-weight: 500;
     padding: 3vw;
     margin: 20px;
     border-radius: 20px;
@@ -142,17 +149,15 @@ button:hover {
 
 .h2-container {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--blue);
-    padding: 0 15px 0 15px;
     color: var(--brightred);
-    margin: 30px;
-    border-radius: 20px;
 }
 
 h2 {
+    padding: 20px 15px 20px 15px;
+    border-radius: 20px;
+    background-color: var(--blue);
     font-size: 50px;
     margin: 20px;
 }
@@ -222,6 +227,7 @@ input[type="text"] {
     background-color: var(--blue);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
+    font-weight: 600;
 }
 
 /*########################
