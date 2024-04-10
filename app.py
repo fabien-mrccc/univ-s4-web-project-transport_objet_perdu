@@ -23,3 +23,4 @@ def my_transport_company():
 @app.get('/connexion-compagnie-transport')
 def login():
     return render_template('connexion_compagnie_transport.html')
+
