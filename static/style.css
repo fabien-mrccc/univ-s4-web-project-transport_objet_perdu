@@ -134,6 +134,7 @@ button:hover {
     justify-content: space-around;
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
+    height: 60%;
     background-color: var(--brightred);
     padding: 30px;
 }
