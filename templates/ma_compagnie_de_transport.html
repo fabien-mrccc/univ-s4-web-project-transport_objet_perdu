@@ -1,36 +1,54 @@
 {% include "header.html" %}
-    <div class="form-page company-page">
-        <h2>Information sur ma compagnie :</h2>
-        <div class="form company-form">
+
+    <div class="main-container">
+        <div class="h2-container">
+            <h2>MA COMPAGNIE DE TRANSPORT</h2>
+        </div>
             <form action="/ma-compagnie-de-transport" method="post">
+                <div class="sub-form-container">
+                    <div class="sub-form">
+                        <div>
+                            <h3>Information de compte :</h3>
 
-                <h3>Information de compte :</h3>
-                <label for="company_name">Nom de la compagnie :</label><br>
-                <input type="text" id="company_name" name="company_name"><br><br>
-                <label for="website">Site web :</label><br>
-                <input type="text" id="website" name="web"><br><br>
-                <label for="email">Mon email :</label><br>
-                <input type="text" id="email" name="email"><br><br>
-                <label for="password">Mon mot de passe :</label><br>
-                <input type="text" id="password" name="password"><br><br>
-
-                <h3>Localisation :</h3>
-                <label for="city">Ville :</label><br>
-                <input type="text" id="city" name="city"><br><br>
-                <label for="postal_code">Code postal :</label><br>
-                <input type="text" id="postal_code" name="postal_code"><br><br>
-
-                <h3>Information de contact :</h3>
-                <label for="phone_number">Numéro de téléphone :</label><br>
-                <input type="text" id="phone_number" name="phone_number"><br><br>
-                <label for="address">Adresse :</label><br>
-                <input type="text" id="address" name="address"><br><br>
-                <label for="contact_page">Page de contact :</label><br>
-                <input type="text" id="contact_page" name="contact_page"><br><br>
-            
-                <button class="form-button " id="recovery-form-button" type="submit">Enregistrer les modifications</button>
+                            <label for="company_name">Nom de la compagnie :</label><br>
+                            <input type="text" id="company_name" name="company_name"><br><br>
+    
+                            <label for="website">Site web :</label><br>
+                            <input type="text" id="website" name="web"><br><br>
+    
+                            <label for="email">Mon email :</label><br>
+                            <input type="text" id="email" name="email"><br><br>
+                            
+                            <label for="password">Mon mot de passe :</label><br>
+                            <input type="text" id="password" name="password"><br><br>
+                        </div>
+                    </div>
+                    <div class="sub-form">
+                        <div>
+                            <h3>Localisation :</h3>
+                            <label for="city">Ville :</label><br>
+                            <input type="text" id="city" name="city"><br><br>
+                            <label for="postal_code">Code postal :</label><br>
+                            <input type="text" id="postal_code" name="postal_code"><br><br>
+                        </div>
+                    </div>
+                    <div class="sub-form">
+                        <div>
+                            <h3>Information de contact :</h3>
+                            <label for="phone_number">Numéro de téléphone :</label><br>
+                            <input type="text" id="phone_number" name="phone_number"><br><br>
+                            <label for="address">Adresse :</label><br>
+                            <input type="text" id="address" name="address"><br><br>
+                            <label for="contact_page">Page de contact :</label><br>
+                            <input type="text" id="contact_page" name="contact_page"><br><br>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button class="blue-button blue-box-shadow" id="myCompanyFormButton" type="submit">Enregistrer les modifications</button>
+                </div>
             </form>
         </div>
     </div>
-    
+
 {% include "footer.html" %}
