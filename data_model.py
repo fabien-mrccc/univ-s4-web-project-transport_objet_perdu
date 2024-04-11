@@ -53,9 +53,9 @@ def register_company_account(name, website, email, password, city, postal_code):
   db_run('INSERT INTO CompagnieDeTransport (Nom, SiteWeb, Email, MotDePasseHash) VALUES (?,?,?,?)',
          (name, website, email, generate_password_hash(password)))
   
-  city_in = db_run('SELECT Nom, CodePostal FROM Ville WHERE Nom = ? AND CodePostal = ?', (city, postal_code))
+  city_in = db_fetch("SELECT 1 FROM Ville WHERE Nom = ? AND CodePostal = ? LIMIT 1" , (city, postal_code))
 
-  if city_in.fetchone() is None:
+  if city_in is None:
     db_run('INSERT INTO Ville (Nom, CodePostal) VALUES (?,?)', (city, postal_code))
   
   city_dict = db_fetch("SELECT ID FROM Ville WHERE Nom = ? AND CodePostal = ?;", (city, postal_code))
