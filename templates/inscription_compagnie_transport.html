@@ -5,6 +5,9 @@
             <h2>INSCRIPTION</h2>
             <button class="simple-size-button red-button blue-box-shadow" id="loginButton">Connexion</button>
         </div>
+        {% if email_in %}
+            <p class ="error">⚠️ Cet email est déjà utilisé. ⚠️</p>
+        {% endif %}
             <form action="/inscription-compagnie-transport" method="post">
                 <div class="sub-form-container">
                     <div class="sub-form">

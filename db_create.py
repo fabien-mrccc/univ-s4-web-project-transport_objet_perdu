@@ -27,21 +27,6 @@ def load(db_name=DBFILENAME):
               PRIMARY KEY (CompagnieDeTransport_Email, Ville_ID)
           )
          """)
-  
-  db_run("""
-        INSERT INTO CompagnieDeTransport (Nom, SiteWeb, Email, MotDePasseHash) 
-        VALUES ('Transports Dupont', 'https://www.transports-dupont.com', 'contact@transports-dupont.com', 'hash_du_mot_de_passe');
-        """)
-  
-  db_run("""
-        INSERT INTO Ville (Nom, CodePostal) 
-        VALUES ('Paris', '75000');
-        """)
-  
-  db_run("""
-        INSERT INTO InformationsDeContact (CompagnieDeTransport_Email, Ville_ID, Tel, Adresse, PageContact) 
-        VALUES ('contact@transports-dupont.com', 1, '01 23 45 67 89', '123 rue de Paris, 75000 Paris', 'https://www.transports-dupont.com/contact');
-        """)
 
 # load recipe data
 load()

@@ -26,7 +26,7 @@ def login():
 
 @app.get('/inscription-compagnie-transport')
 def register_get():
-    return render_template('inscription_compagnie_transport.html')
+    return render_template('inscription_compagnie_transport.html', email_in=False)
 
 ########################
 #     POST ROUTES      #
@@ -40,7 +40,10 @@ def register_post():
     password = request.form["password"]
     city = request.form["city"]
     postal_code = request.form["postal_code"]
-    model.register_company_account(name, website, email, password, city, postal_code)
+    try:
+        model.register_company_account(name, website, email, password, city, postal_code)
+    except ValueError as err:
+        return render_template('inscription_compagnie_transport.html', email_in=True)
     return redirect('/connexion-compagnie-transport')
 
 """
