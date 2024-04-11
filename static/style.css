@@ -203,7 +203,7 @@ h2 {
     margin: 20px;
 }
 
-.basic-form form, .sub-form div{
+.basic-form form, .sub-form div {
     width : 80%;
 }
 
@@ -217,7 +217,7 @@ h2 {
     border-style: solid;
 }
 
-input[type="text"] {
+input {
     font-size: 18px;
 }
 
@@ -241,6 +241,7 @@ input[type="text"] {
     font-weight: 600;
     font-size: 20px;
 }
+
 /*########################
 #        RESPONSIVE      #
 ########################*/

@@ -19,8 +19,10 @@ function main() {
     //buttonEventListener(deleteAccoutButton, "/delete-account", true);
 }
 
-function buttonEventListener(button, page, isPost = false) {
+function buttonEventListener(button, page, isPost=false) {
+
     if (button != null) {
+
         button.addEventListener('click', function() {
             
             if (isPost) {
@@ -34,6 +36,7 @@ function buttonEventListener(button, page, isPost = false) {
 }
 
 function postRedirect(page) {
+
     let form = document.createElement('form');
     document.body.appendChild(form);
     form.method = 'post';
@@ -42,5 +45,8 @@ function postRedirect(page) {
 }
 
 function redirect(page) {
+
     window.location.href = page; 
 }
+
+
