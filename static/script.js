@@ -1,5 +1,4 @@
 "use strict";
-
 document.addEventListener('DOMContentLoaded', main);
 
 function main() {
@@ -13,6 +12,7 @@ function main() {
 
     buttonEventListener(leftHomeButton, "/recuperer-objet-perdu");
     buttonEventListener(rightHomeButton, "/ma-compagnie-de-transport");
+    
     buttonEventListener(disconnectButton, "/deconnexion-compagnie-transport", true);
     buttonEventListener(registerButton, "/inscription-compagnie-transport");
     buttonEventListener(loginButton, "/connexion-compagnie-transport");

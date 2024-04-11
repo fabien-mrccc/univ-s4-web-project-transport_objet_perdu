@@ -1,7 +1,15 @@
 from flask import Flask, session, request, redirect, render_template, url_for
 import data_model as model
 
+
 app = Flask(__name__)
+app.secret_key = b'6dbb6b3863634aa6a72270de16df48e666f2564fddcc5fe3c27effe4393a7f4b'
+
+def loged_in():
+    if not('email' in session):
+        return False
+    else:
+        return True
 
 
 ########################
@@ -18,7 +26,10 @@ def recover_lost_object():
 
 @app.get('/ma-compagnie-de-transport')
 def my_transport_company():
-    return render_template('ma_compagnie_de_transport.html')
+    if(loged_in() == True):
+        return render_template('ma_compagnie_de_transport.html')
+    else:
+        return login_get()
 
 @app.get('/connexion-compagnie-transport')
 def login_get():
@@ -27,6 +38,7 @@ def login_get():
 @app.get('/inscription-compagnie-transport')
 def register_get():
     return render_template('inscription_compagnie_transport.html', email_in=False)
+
 
 ########################
 #     POST ROUTES      #
@@ -59,6 +71,11 @@ def login_post():
         return render_template('connexion_compagnie_transport.html')
     session['email'] = email
     return redirect('/ma-compagnie-de-transport')
+
+@app.post('/deconnexion-compagnie-transport')
+def logout_post():
+    session.clear()
+    return redirect('/')
 
 
 
