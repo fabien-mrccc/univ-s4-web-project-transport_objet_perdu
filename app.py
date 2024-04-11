@@ -41,7 +41,7 @@ def register_post():
     city = request.form["city"]
     postal_code = request.form["postal_code"]
     model.register_company_account(name, website, email, password, city, postal_code)
-    return redirect(url_for('connexion-compagnie-transport'))
+    return redirect('/connexion-compagnie-transport')
 
 """
 @app.post('/delete-account')
