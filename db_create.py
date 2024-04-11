@@ -17,14 +17,14 @@ def load(db_name=DBFILENAME):
   db_run('CREATE TABLE Ville (ID INTEGER PRIMARY KEY AUTOINCREMENT, Nom TEXT, CodePostal TEXT)')
   db_run("""
           CREATE TABLE InformationsDeContact (
-              CompagnieDeTransport_ID INTEGER,
+              CompagnieDeTransport_Email TEXT,
               Ville_ID INTEGER,
               Tel TEXT,
               Adresse TEXT,
               PageContact TEXT,
-              FOREIGN KEY (CompagnieDeTransport_ID) REFERENCES CompagnieDeTransport(ID) ON DELETE CASCADE,
+              FOREIGN KEY (CompagnieDeTransport_Email) REFERENCES CompagnieDeTransport(Email) ON DELETE CASCADE,
               FOREIGN KEY (Ville_ID) REFERENCES Ville(ID),
-              PRIMARY KEY (CompagnieDeTransport_ID, Ville_ID)
+              PRIMARY KEY (CompagnieDeTransport_Email, Ville_ID)
           )
          """)
   
@@ -39,8 +39,8 @@ def load(db_name=DBFILENAME):
         """)
   
   db_run("""
-        INSERT INTO InformationsDeContact (CompagnieDeTransport_ID, Ville_ID, Tel, Adresse, PageContact) 
-        VALUES (1, 1, '01 23 45 67 89', '123 rue de Paris, 75000 Paris', 'https://www.transports-dupont.com/contact');
+        INSERT INTO InformationsDeContact (CompagnieDeTransport_Email, Ville_ID, Tel, Adresse, PageContact) 
+        VALUES ('contact@transports-dupont.com', 1, '01 23 45 67 89', '123 rue de Paris, 75000 Paris', 'https://www.transports-dupont.com/contact');
         """)
 
 # load recipe data
