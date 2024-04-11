@@ -70,3 +70,11 @@ def save_contact(company_id, city_id, phone, address, contact_page):
     
 def delete_account(company_id):
   db_run("DELETE FROM CompagnieDeTransport WHERE ID=?", (company_id))
+
+def authentification(email, password):
+  password_hash = db_run("SELECT MotDePasseHash FROM CompagnieDeTransport WHERE Email = ?", (email,)).fetchone()
+
+  if( check_password_hash(password_hash,password)):
+    return email
+  else:
+    return ValueError("Invalid email or password !")
