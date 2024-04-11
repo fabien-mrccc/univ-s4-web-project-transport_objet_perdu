@@ -22,7 +22,7 @@ def load(db_name=DBFILENAME):
               Tel TEXT,
               Adresse TEXT,
               PageContact TEXT,
-              FOREIGN KEY (CompagnieDeTransport_ID) REFERENCES CompagnieDeTransport(ID),
+              FOREIGN KEY (CompagnieDeTransport_ID) REFERENCES CompagnieDeTransport(ID) ON DELETE CASCADE,
               FOREIGN KEY (Ville_ID) REFERENCES Ville(ID),
               PRIMARY KEY (CompagnieDeTransport_ID, Ville_ID)
           )

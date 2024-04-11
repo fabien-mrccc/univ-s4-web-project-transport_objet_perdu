@@ -4,7 +4,8 @@ import math
 
 DBFILENAME = 'companies.sqlite'
 
-# Utility functions
+# BEGIN Utility functions
+#
 def db_fetch(query, args=(), all=False, db_name=DBFILENAME):
   with sqlite3.connect(db_name) as conn:
     # to allow access to columns by name in res
@@ -29,19 +30,18 @@ def db_insert(query, args=(), db_name=DBFILENAME):
     conn.commit()
     return cur.lastrowid
 
-
 def db_run(query, args=(), db_name=DBFILENAME):
   with sqlite3.connect(db_name) as conn:
     cur = conn.execute(query, args)
     conn.commit()
     return cur
 
-
 def db_update(query, args=(), db_name=DBFILENAME):
   with sqlite3.connect(db_name) as conn:
     cur = conn.execute(query, args)
     conn.commit()
     return cur.rowcount
+<<<<<<< HEAD
   
 def register_company_account(name, website, email, password, city, postal_code):
   db_run('INSERT INTO CompagnieDeTransport (Nom, SiteWeb, Email, MotDePasseHash) VALUES (?,?,?,?)',(name,website,email, generate_password_hash(password),))
@@ -53,3 +53,16 @@ def register_company_account(name, website, email, password, city, postal_code):
   Ville_ID = db_fetch("SELECT ID FROM Ville WHERE Nom = ? AND CodePostal = ?;", (city, postal_code))
   print(Ville_ID.keys)
   db_run('INSERT INTO InformationsDeContact (CompagnieDeTransport_ID, Ville_ID) VALUES (?,?)', (CompagnieDeTransport_ID['CompagnieDeTransport_ID'], Ville_ID['Ville_ID'],))
+=======
+#  
+# END Utility functions
+
+def save_contact(company_id, city_id, phone, address, contact_page):
+    db_run("""
+           UPDATE InformationsDeContact SET Tel=?, Adresse=?, PageContact=? 
+           WHERE CompagnieDeTransport_ID=? AND Ville_ID=?;""" 
+           (phone, address, contact_page, company_id, city_id))
+    
+def delete_account(company_id):
+  db_run("DELETE FROM CompagnieDeTransport WHERE ID=?", (company_id))
+>>>>>>> aeeb0b79e56ac13c8b3bf86d62509e6042e7319c
