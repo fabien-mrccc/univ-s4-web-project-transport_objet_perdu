@@ -21,7 +21,7 @@ def my_transport_company():
     return render_template('ma_compagnie_de_transport.html')
 
 @app.get('/connexion-compagnie-transport')
-def login():
+def login_get():
     return render_template('connexion_compagnie_transport.html')
 
 @app.get('/inscription-compagnie-transport')
@@ -50,3 +50,15 @@ def register_post():
 @app.post('/delete-account')
 def delete_account():
 """
+@app.post('/connexion-compagnie-transport')
+def login_post():
+    email = request.form['email']
+    try:
+        model.authentification(request.form['email'], request.form['password'])
+    except ValueError as err:
+        return render_template('connexion_compagnie_transport.html')
+    session['email'] = email
+    return redirect('/ma-compagnie-de-transport')
+
+
+
