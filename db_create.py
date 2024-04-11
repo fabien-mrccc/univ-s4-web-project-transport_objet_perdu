@@ -13,7 +13,7 @@ def load(db_name=DBFILENAME):
   db_run('DROP TABLE IF EXISTS Ville')
   db_run('DROP TABLE IF EXISTS InformationsDeContact')
 
-  db_run('CREATE TABLE CompagnieDeTransport (ID INTEGER PRIMARY KEY AUTOINCREMENT, Nom TEXT, SiteWeb TEXT UNIQUE, Email TEXT UNIQUE, MotDePasseHash TEXT)')
+  db_run('CREATE TABLE CompagnieDeTransport (ID INTEGER PRIMARY KEY AUTOINCREMENT, Nom TEXT, SiteWeb TEXT, Email TEXT UNIQUE, MotDePasseHash TEXT)')
   db_run('CREATE TABLE Ville (ID INTEGER PRIMARY KEY AUTOINCREMENT, Nom TEXT, CodePostal TEXT)')
   db_run("""
           CREATE TABLE InformationsDeContact (

@@ -28,8 +28,6 @@ def login():
 def register_get():
     return render_template('inscription_compagnie_transport.html')
 
-<<<<<<< HEAD
-
 ########################
 #     POST ROUTES      #
 ########################
@@ -44,13 +42,8 @@ def register_post():
     postal_code = request.form["postal_code"]
     model.register_company_account(name, website, email, password, city, postal_code)
     return redirect(url_for('connexion-compagnie-transport'))
-=======
-########################
-#      POST ROUTES     #
-########################
 
 """
 @app.post('/delete-account')
 def delete_account():
 """
->>>>>>> aeeb0b79e56ac13c8b3bf86d62509e6042e7319c
