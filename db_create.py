@@ -13,7 +13,7 @@ def load(db_name=DBFILENAME):
   db_run('DROP TABLE IF EXISTS Ville')
   db_run('DROP TABLE IF EXISTS InformationsDeContact')
 
-  db_run('CREATE TABLE CompagnieDeTransport (ID INTEGER PRIMARY KEY AUTOINCREMENT, Nom TEXT, SiteWeb TEXT UNIQUE, Email TEXT UNIQUE, PasswordHash TEXT)')
+  db_run('CREATE TABLE CompagnieDeTransport (ID INTEGER PRIMARY KEY AUTOINCREMENT, Nom TEXT, SiteWeb TEXT UNIQUE, Email TEXT UNIQUE, MotDePasseHash TEXT)')
   db_run('CREATE TABLE Ville (ID INTEGER PRIMARY KEY AUTOINCREMENT, Nom TEXT, CodePostal TEXT)')
   db_run("""
           CREATE TABLE InformationsDeContact (
@@ -29,7 +29,7 @@ def load(db_name=DBFILENAME):
          """)
   
   db_run("""
-        INSERT INTO CompagnieDeTransport (Nom, SiteWeb, Email, PasswordHash) 
+        INSERT INTO CompagnieDeTransport (Nom, SiteWeb, Email, MotDePasseHash) 
         VALUES ('Transports Dupont', 'https://www.transports-dupont.com', 'contact@transports-dupont.com', 'hash_du_mot_de_passe');
         """)
   

@@ -1,4 +1,4 @@
-from flask import Flask, session, request, redirect, render_template
+from flask import Flask, session, request, redirect, render_template, url_for
 import data_model as model
 
 app = Flask(__name__)
@@ -25,5 +25,21 @@ def login():
     return render_template('connexion_compagnie_transport.html')
 
 @app.get('/inscription-compagnie-transport')
-def sign_up():
+def register_get():
     return render_template('inscription_compagnie_transport.html')
+
+
+########################
+#     POST ROUTES      #
+########################
+
+@app.post('/inscription-compagnie-transport')
+def register_post():
+    name = request.form["company_name"]
+    website = request.form["website"]
+    email = request.form["email"]
+    password = request.form["password"]
+    city = request.form["city"]
+    postal_code = request.form["postal_code"]
+    model.register_company_account(name, website, email, password, city, postal_code)
+    return redirect(url_for('connexion-compagnie-transport'))

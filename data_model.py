@@ -43,3 +43,13 @@ def db_update(query, args=(), db_name=DBFILENAME):
     conn.commit()
     return cur.rowcount
   
+def register_company_account(name, website, email, password, city, postal_code):
+  db_run('INSERT INTO CompagnieDeTransport (Nom, SiteWeb, Email, MotDePasseHash) VALUES (?,?,?,?)',(name,website,email, generate_password_hash(password),))
+  if db_run('SELECT Nom, CodePostal FROM Ville WHERE Nom = ? AND CodePostal = ?', (city, postal_code,)) == None:
+    db_run('INSERT INTO Ville (Nom, CodePostal) VALUES (?,?)', (city, postal_code,))
+  
+  CompagnieDeTransport_ID = db_fetch("SELECT ID FROM CompagnieDeTransport WHERE SiteWeb = ? and Email = ?", (website, email,))
+  print(CompagnieDeTransport_ID.keys)
+  Ville_ID = db_fetch("SELECT ID FROM Ville WHERE Nom = ? AND CodePostal = ?;", (city, postal_code))
+  print(Ville_ID.keys)
+  db_run('INSERT INTO InformationsDeContact (CompagnieDeTransport_ID, Ville_ID) VALUES (?,?)', (CompagnieDeTransport_ID['CompagnieDeTransport_ID'], Ville_ID['Ville_ID'],))
