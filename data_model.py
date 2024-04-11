@@ -1,6 +1,5 @@
 import sqlite3
 from werkzeug.security import check_password_hash, generate_password_hash
-import math
 
 DBFILENAME = 'companies.sqlite'
 
@@ -46,12 +45,18 @@ def db_update(query, args=(), db_name=DBFILENAME):
  
 def register_company_account(name, website, email, password, city, postal_code):
 
-  db_run('INSERT INTO CompagnieDeTransport (Nom, SiteWeb, Email, MotDePasseHash) VALUES (?,?,?,?)',(name, website, email, generate_password_hash(password)))
+  emails = db_run('SELECT email FROM CompagnieDeTransport')
+
+  if email in emails:
+    raise ValueError 
+    
+  db_run('INSERT INTO CompagnieDeTransport (Nom, SiteWeb, Email, MotDePasseHash) VALUES (?,?,?,?)',
+         (name, website, email, generate_password_hash(password)))
   
-  if db_run('SELECT Nom, CodePostal FROM Ville WHERE Nom = ? AND CodePostal = ?', (city, postal_code)) == None:
+  if db_run('SELECT Nom, CodePostal FROM Ville WHERE Nom = ? AND CodePostal = ?', (city, postal_code)).rowcount == 0:
     db_run('INSERT INTO Ville (Nom, CodePostal) VALUES (?,?)', (city, postal_code))
   
-  comp_dict = db_fetch("SELECT ID FROM CompagnieDeTransport WHERE SiteWeb = ? and Email = ?", (website, email,))
+  comp_dict = db_fetch("SELECT ID FROM CompagnieDeTransport WHERE Email = ?", (email))
 
   city_dict = db_fetch("SELECT ID FROM Ville WHERE Nom = ? AND CodePostal = ?;", (city, postal_code))
 
