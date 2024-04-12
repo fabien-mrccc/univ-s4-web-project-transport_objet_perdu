@@ -8,7 +8,7 @@ function main() {
     let disconnectButton = document.getElementById('disconnectButton');
     let registerButton = document.getElementById('registerButton');
     let loginButton = document.getElementById('loginButton');
-    //let deleteAccoutButton = document.getElementById('deleteAccoutButton');
+    let deleteAccountButton = document.getElementById('deleteAccountButton');
 
     buttonEventListener(leftHomeButton, "/recuperer-objet-perdu");
     buttonEventListener(rightHomeButton, "/ma-compagnie-de-transport");
@@ -16,7 +16,7 @@ function main() {
     buttonEventListener(disconnectButton, "/deconnexion-compagnie-transport", true);
     buttonEventListener(registerButton, "/inscription-compagnie-transport");
     buttonEventListener(loginButton, "/connexion-compagnie-transport");
-    //buttonEventListener(deleteAccoutButton, "/delete-account", true);
+    buttonEventListener(deleteAccountButton, "/delete-account", true);
 }
 
 function buttonEventListener(button, page, isPost=false) {

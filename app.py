@@ -11,7 +11,8 @@ app.secret_key = b'6dbb6b3863634aa6a72270de16df48e666f2564fddcc5fe3c27effe4393a7
 
 @app.get('/')
 def home(): 
-    return render_template('accueil.html')
+    email_deleted = session.pop('email_deleted', '')
+    return render_template('accueil.html', email=email_deleted)
 
 @app.get('/recuperer-objet-perdu')
 def recover_lost_object():
@@ -39,12 +40,12 @@ def register_get():
 
 @app.post('/inscription-compagnie-transport')
 def register_post():
-    name = request.form["company_name"]
-    website = request.form["website"]
-    email = request.form["email"]
-    password = request.form["password"]
-    city = request.form["city"]
-    postal_code = request.form["postal_code"]
+    name = request.form["company_name"].strip()
+    website = request.form["website"].strip()
+    email = request.form["email"].strip()
+    password = request.form["password"].strip()
+    city = request.form["city"].strip()
+    postal_code = request.form["postal_code"].strip()
     try:
         model.register_company_account(name, website, email, password, city, postal_code)
     except ValueError:
@@ -68,8 +69,9 @@ def logout_post():
     session.clear()
     return redirect('/')
 
-"""
 @app.post('/delete-account')
 def delete_account():
-"""
-
+    email_deleted = model.delete_account(session['email'])
+    session.clear()
+    session['email_deleted'] = email_deleted
+    return redirect('/')

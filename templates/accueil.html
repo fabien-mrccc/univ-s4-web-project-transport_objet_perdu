@@ -1,5 +1,10 @@
 {% include "header.html" %}
-
+    {% if email != '' %}
+    <div class="feedback-container">
+        <p class="feedback">✅ Votre compte "{{email}}" a bien été supprimé. ✅</p>
+    </div>
+    {% endif %}
+    
     <div class="home-buttons">
         <button class="home-button blue-button red-box-shadow" id ="leftHomeButton">Récupérer mon objet perdu</button>
         <button class="home-button red-button blue-box-shadow" id ="rightHomeButton">Ma compagnie de transport</button>

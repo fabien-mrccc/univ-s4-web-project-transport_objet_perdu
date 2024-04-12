@@ -68,8 +68,19 @@ def save_contact(company_id, city_id, phone, address, contact_page):
            WHERE CompagnieDeTransport_ID=? AND Ville_ID=?;""" 
            (phone, address, contact_page, company_id, city_id))
     
-def delete_account(company_id):
-  db_run("DELETE FROM CompagnieDeTransport WHERE ID=?", (company_id))
+def delete_account(email):
+
+  city_id = db_fetch("SELECT Ville_ID FROM InformationsDeContact WHERE CompagnieDeTransport_Email=?", (email,))
+
+  db_run("DELETE FROM InformationsDeContact WHERE CompagnieDeTransport_Email=?", (email,))
+  db_run("DELETE FROM CompagnieDeTransport WHERE Email=?", (email,))
+
+  city_in = db_fetch("SELECT Ville_ID FROM InformationsDeContact WHERE Ville_ID = ?", (city_id['Ville_ID'],))
+
+  if city_in is None:
+    db_run("DELETE FROM Ville WHERE ID=?", (city_id['Ville_ID'],))
+
+  return email
 
 def authentification(email, password):
   password_hash = db_fetch("SELECT MotDePasseHash FROM CompagnieDeTransport WHERE Email = ?", (email,))
