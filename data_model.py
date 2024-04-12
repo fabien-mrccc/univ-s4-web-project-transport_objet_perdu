@@ -74,7 +74,7 @@ def delete_account(company_id):
 def authentification(email, password):
   password_hash = db_fetch("SELECT MotDePasseHash FROM CompagnieDeTransport WHERE Email = ?", (email,))
 
-  if( password_hash is not None and check_password_hash(password_hash[0], password)):
+  if( password_hash is not None and check_password_hash(password_hash['MotDePasseHash'], password)):
     return email
   else:
     raise ValueError("Invalid email or password.")
