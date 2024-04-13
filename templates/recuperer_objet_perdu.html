@@ -6,8 +6,8 @@
         </div>
         <div class="basic-form">
             <form action="/recuperer-objet-perdu" method="post">
-                <label for="departements">Département :</label><br>
-                <select name="departements" id="departements" required>
+                <label for="departments">Département :</label><br>
+                <select name="departments" id="departments" required>
                 {% for department in departments %}
                     <option value="{{ department }}">{{ department['code']}} - {{department['nom'] }}</option>
                 {% endfor %}
