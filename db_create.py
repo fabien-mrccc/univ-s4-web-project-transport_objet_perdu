@@ -8,32 +8,50 @@ def db_run(query, args=(), db_name=DBFILENAME):
     cur = conn.execute(query, args)
     conn.commit()
 
+
 def load(db_name=DBFILENAME):
-  db_run('DROP TABLE IF EXISTS CompagnieDeTransport')
-  db_run('DROP TABLE IF EXISTS Ville')
-  db_run('DROP TABLE IF EXISTS InformationsDeContact')
+  
+  db_run('DROP TABLE IF EXISTS TransportCompany')
+  db_run('DROP TABLE IF EXISTS City')
+  db_run('DROP TABLE IF EXISTS ContactInformation')
+  db_run('DROP TABLE IF EXISTS User')
 
   db_run("""
-         CREATE TABLE CompagnieDeTransport ( 
-              Email TEXT PRIMARY KEY, 
-              MotDePasseHash TEXT, 
-              Nom TEXT, 
-              SiteWeb TEXT,
-              Ville_ID INTEGER,
-              FOREIGN KEY (Ville_ID) REFERENCES Ville(ID))
+          CREATE TABLE User (
+              Email TEXT PRIMARY KEY,
+              PasswordHash TEXT
+          );
          """)
-  db_run('CREATE TABLE Ville (ID INTEGER PRIMARY KEY AUTOINCREMENT, Nom TEXT, Departement TEXT)')
+  
   db_run("""
-          CREATE TABLE InformationsDeContact (
-              CompagnieDeTransport_Email TEXT,
-              Ville_ID INTEGER,
-              Tel TEXT,
-              Adresse TEXT,
-              PageContact TEXT,
-              FOREIGN KEY (CompagnieDeTransport_Email) REFERENCES CompagnieDeTransport(Email) ON DELETE CASCADE,
-              FOREIGN KEY (Ville_ID) REFERENCES Ville(ID),
-              PRIMARY KEY (CompagnieDeTransport_Email, Ville_ID)
-          )
+          CREATE TABLE TransportCompany (
+              ID INTEGER PRIMARY KEY AUTOINCREMENT,
+              Name TEXT,
+              Website TEXT,
+              User_Email TEXT,
+              FOREIGN KEY (User_Email) REFERENCES User(Email)
+          );
+         """)
+
+  db_run("""
+          CREATE TABLE City (
+              ID INTEGER PRIMARY KEY AUTOINCREMENT,
+              Name TEXT,
+              Department TEXT
+          );
+         """)
+
+  db_run("""
+          CREATE TABLE ContactInformation (
+              Company_ID INTEGER,
+              City_ID INTEGER,
+              Phone TEXT,
+              Address TEXT,
+              ContactPage TEXT,
+              PRIMARY KEY (Company_ID, City_ID),
+              FOREIGN KEY (Company_ID) REFERENCES TransportCompany(ID),
+              FOREIGN KEY (City_ID) REFERENCES City(ID)
+          );
          """)
 
 # load recipe data

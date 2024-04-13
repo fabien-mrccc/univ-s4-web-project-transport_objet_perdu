@@ -6,18 +6,12 @@
         </div>
         <div class="basic-form">
             <form action="/recuperer-objet-perdu" method="post">
-                <label for="departments">Département :</label><br>
-                <select name="departments" id="departments" required>
-                {% for department in departments %}
-                    <option value="{{ department }}">{{ department['code']}} - {{department['nom'] }}</option>
-                {% endfor %}
-                </select><br><br>
                 
                 <label for="cities">Ville :</label><br>
                 <select name="cities" id="cities" required>
                 {% if cities %}
                     {% for city in cities %}
-                        <option value="{{ city }}">{{ city }}</option>
+                        <option value="{{ city['Name'] }}, {{ city['Department'] }}">{{ city['Name'] }}, {{ city['Department'] }}</option>
                     {% endfor %}
                 {% endif %}
                 </select><br><br>

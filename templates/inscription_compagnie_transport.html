@@ -30,10 +30,10 @@
                     <div class="red-container sub-form">
                         <div>
                             <h3>Localisation :</h3>
-                            <label for="departements">Département :</label><br>
-                            <select name="departements" id="departements" required>
+                            <label for="departments">Département :</label><br>
+                            <select name="departments" id="departments" required>
                             {% for department in departments %}
-                                <option value="{{ department['nom'] }}">{{ department['code']}} - {{department['nom'] }}</option>
+                                <option value="{{ department['nom']}} ({{ department['code']}})">{{ department['code']}} - {{department['nom'] }}</option>
                             {% endfor %}
                             </select><br><br>
 

@@ -16,36 +16,32 @@ departments = response.json()
 
 @app.get('/')
 def home(): 
+
     email_deleted = session.pop('email_deleted', '')
     return render_template('accueil.html', email=email_deleted)
 
+
 @app.get('/recuperer-objet-perdu')
 def recover_lost_object_get():
-    cities = model.db_fetch("SELECT Nom FROM Ville;", all=True)
 
-    cities_names = [city['Nom'] for city in cities]
-    
-    companies = model.db_fetch("SELECT Nom FROM CompagnieDeTransport;", all=True)
-    companies_names = [company['Nom'] for company in companies]
+    cities = model.get_cities()
+    companies_names = model.get_companies_names()
+    return render_template('recuperer_objet_perdu.html', cities=cities, companies_names=companies_names, is_submitted=False, informations=None)
 
-    return render_template('recuperer_objet_perdu.html', cities=cities_names, departments=departments, companies_names=companies_names, is_submitted=False, informations=None)
 
 @app.get('/ma-compagnie-de-transport')
 def my_transport_company_get():
+
     if 'email' in session:
         email = session['email']
-        company_name = model.db_fetch("SELECT Nom FROM CompagnieDeTransport WHERE Email = ?;", (email,))
-        website = model.db_fetch("SELECT SiteWeb FROM CompagnieDeTransport WHERE Email = ?;", (email,))
-
-        city_ID = model.db_fetch("SELECT Ville_ID FROM InformationsDeContact WHERE CompagnieDeTransport_Email = ?;", (email,))
-        city = model.db_fetch("SELECT Nom FROM Ville WHERE ID = ?;", (city_ID['Ville_ID'],))
-        department = model.db_fetch("SELECT Departement FROM Ville WHERE ID = ?;", (city_ID['Ville_ID'],))
-
-        phone_number = model.db_fetch("SELECT Tel FROM InformationsDeContact WHERE CompagnieDeTransport_Email = ? AND Ville_ID = ?;", (email,city_ID['Ville_ID']))
-        address = model.db_fetch("SELECT Adresse FROM InformationsDeContact WHERE CompagnieDeTransport_Email = ? AND Ville_ID = ?;", (email,city_ID['Ville_ID']))
-        contact_page = model.db_fetch("SELECT PageContact FROM InformationsDeContact WHERE CompagnieDeTransport_Email = ? AND Ville_ID = ?;", (email,city_ID['Ville_ID']))
-
-        return render_template('ma_compagnie_de_transport.html', company_name = company_name['Nom'], website = website['SiteWeb'], email=email, city = city['Nom'], department = department['Departement'], phone_number = phone_number['Tel'], address = address['Adresse'], contact_page = contact_page['PageContact'])
+        company = model.get_company(email)
+        city = model.get_city(email)
+        contact_info = model.get_contact_info(company['ID'], city['ID'])
+        if contact_info['Phone'] is None or contact_info['Address'] is None or contact_info['ContactPage'] is None:
+             contact_info['Phone'] = ""
+             contact_info['Address'] = ""
+             contact_info['ContactPage'] =""
+        return render_template('ma_compagnie_de_transport.html', company_name = company['Name'], website = company['Website'], email=email, city = city['Name'], department = city['Department'], phone_number = contact_info['Phone'], address = contact_info['Address'], contact_page = contact_info['ContactPage'])
     else:
         return redirect('/connexion-compagnie-transport')
 
@@ -70,7 +66,7 @@ def register_post():
     email = request.form["email"].strip()
     password = request.form["password"].strip()
     city = request.form["city"].strip()
-    department = request.form["departements"].strip()
+    department = request.form["departments"].strip()
     try:
         model.register_company_account(name, website, email, password, city, department)
     except ValueError:

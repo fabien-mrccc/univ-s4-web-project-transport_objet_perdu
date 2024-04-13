@@ -3,8 +3,10 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 DBFILENAME = 'companies.sqlite'
 
-# BEGIN Utility functions
-#
+###########################
+# BEGIN Utility functions #
+###########################
+
 def db_fetch(query, args=(), all=False, db_name=DBFILENAME):
   with sqlite3.connect(db_name) as conn:
     # to allow access to columns by name in res
@@ -40,62 +42,100 @@ def db_update(query, args=(), db_name=DBFILENAME):
     cur = conn.execute(query, args)
     conn.commit()
     return cur.rowcount
-#  
-# END Utility functions 
- 
+
+#########################
+# END Utility functions #
+#########################
+
+
 def register_company_account(name, website, email, password, city, department):
-
-  email_in = db_fetch("SELECT 1 FROM CompagnieDeTransport WHERE email = ? LIMIT 1", (email,))
     
-  if email_in is not None:
-    raise ValueError("Email already exists.")
+    email_in = db_fetch("SELECT 1 FROM User WHERE Email = ? LIMIT 1", (email,))
     
-  db_run('INSERT INTO CompagnieDeTransport (Nom, SiteWeb, Email, MotDePasseHash) VALUES (?,?,?,?)',
-         (name, website, email, generate_password_hash(password)))
-  
-  city_in = db_fetch("SELECT 1 FROM Ville WHERE Nom = ? AND Departement = ? LIMIT 1" , (city, department))
+    if email_in is not None:
+        raise ValueError("Email already exists.")
+    
+    db_run('INSERT INTO User (Email, PasswordHash) VALUES (?, ?)', 
+           (email, generate_password_hash(password)))
 
-  if city_in is None:
-    db_run('INSERT INTO Ville (Nom, Departement) VALUES (?,?)', (city, department))
+    db_run('INSERT INTO TransportCompany (Name, Website, User_Email) VALUES (?, ?, ?)', 
+           (name, website, email))
   
-  city_dict = db_fetch("SELECT ID FROM Ville WHERE Nom = ? AND Departement = ?;", (city, department))
+    city_id = get_city_id(city, department)
 
-  db_run('INSERT INTO InformationsDeContact (CompagnieDeTransport_Email, Ville_ID) VALUES (?,?)', (email, city_dict['ID']))
+    if city_id is None:
+        db_run('INSERT INTO City (Name, Department) VALUES (?, ?)', (city, department))
+  
+    city_id = db_fetch("SELECT ID FROM City WHERE Name = ? AND Department = ?", (city, department))
+
+    db_run('INSERT INTO ContactInformation (Company_ID, City_ID) VALUES ((SELECT ID FROM TransportCompany WHERE User_Email = ?), ?)', (email, city_id['ID']))
+
 
 def save_contact(email, city, department, phone, address, contact_page):
     
-    city_id = db_fetch("SELECT ID FROM Ville WHERE Nom=? AND Departement=?", (city, department))
+    city_id = get_city_id(city, department)
+    company = get_company(email)
 
-    db_run('UPDATE InformationsDeContact SET Tel=?, Adresse=?, PageContact=? WHERE CompagnieDeTransport_Email=? AND Ville_ID=?;',
-           (phone, address, contact_page, email, city_id['ID']))
+    db_run('UPDATE ContactInformation SET Phone=?, Address=?, ContactPage=? WHERE Company_ID=? AND City_ID=?;',
+           (phone, address, contact_page, company['ID'], city_id['ID']))
+
     
 def delete_account(email):
+    
+    company = get_company(email)
+    db_run("DELETE FROM ContactInformation WHERE Company_ID=?", (company['ID'],))
+    db_run("DELETE FROM TransportCompany WHERE User_Email=?", (email,))
+    db_run("DELETE FROM User WHERE Email=?", (email,))
 
-  city_id = db_fetch("SELECT Ville_ID FROM InformationsDeContact WHERE CompagnieDeTransport_Email=?", (email,))
+    return email
 
-  db_run("DELETE FROM InformationsDeContact WHERE CompagnieDeTransport_Email=?", (email,))
-  db_run("DELETE FROM CompagnieDeTransport WHERE Email=?", (email,))
-
-  city_in = db_fetch("SELECT Ville_ID FROM InformationsDeContact WHERE Ville_ID = ?", (city_id['Ville_ID'],))
-
-  if city_in is None:
-    db_run("DELETE FROM Ville WHERE ID=?", (city_id['Ville_ID'],))
-
-  return email
 
 def authentification(email, password):
-  password_hash = db_fetch("SELECT MotDePasseHash FROM CompagnieDeTransport WHERE Email = ?", (email,))
+    
+    password_hash = db_fetch("SELECT PasswordHash FROM User WHERE Email = ?", (email,))
 
-  if( password_hash is not None and check_password_hash(password_hash['MotDePasseHash'], password)):
-    return email
-  else:
-    raise ValueError("Invalid email or password.")
+    if password_hash is not None and check_password_hash(password_hash['PasswordHash'], password):
+        return email
+    else:
+        raise ValueError("Invalid email or password.")
+
   
 def get_contact(company_name, city, department):
-  city_ID = db_fetch("SELECT ID FROM Ville WHERE Nom = ? AND Departement = ? ", (city,department))
-  email = db_fetch("SELECT Email FROM CompagnieDeTransport WHERE Nom = ?",(company_name,))
-  informations = db_fetch("SELECT Tel, Adresse, PageContact FROM InformationsDeContact WHERE CompagnieDeTransport_Email = ? AND Ville_ID = ? ", (email, city_ID['ID']))
-  return informations
+    
+    city_id = get_city_id(city, department)
+    company_id = db_fetch("SELECT ID FROM TransportCompany WHERE Name = ?", (company_name,))
+    informations = db_fetch("SELECT Phone, Address, ContactPage FROM ContactInformation WHERE Company_ID = ? AND City_ID = ? ", (company_id['ID'], city_id['ID']))
+    return informations
 
+
+def get_cities():
+
+  return db_fetch("SELECT * FROM City;", all=True)
+
+def get_companies_names():
+
+  companies = db_fetch("SELECT Name FROM TransportCompany;", all=True)
+  return [company['Name'] for company in companies]
+
+
+def get_company(email):
+
+  return db_fetch("SELECT * FROM TransportCompany WHERE User_Email = ?;", (email,))
+
+
+def get_city(email):
+    
+    city_ID = db_fetch("SELECT ci.City_ID AS ID FROM ContactInformation ci JOIN TransportCompany tc ON ci.Company_ID = tc.ID JOIN User u ON tc.User_Email = u.Email WHERE u.Email = ?;", (email,))
+    return db_fetch("SELECT * FROM City WHERE ID = ?;", (city_ID['ID'],))
+    
+
+def get_city_id(name, department):
+
+  return db_fetch("SELECT ID FROM City WHERE Name = ? AND Department = ?;", 
+                       (name, department))
+
+
+def get_contact_info(company_ID, city_ID):
   
+  return db_fetch("SELECT * FROM ContactInformation WHERE Company_ID = ? AND City_ID = ?;", (company_ID, city_ID))
 
