@@ -14,6 +14,7 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /*BEGIN HEADER*/
@@ -42,7 +43,6 @@ header {
 footer {
     height: 50px;
     color: var(--gray);
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 15px;
     display: flex;
     flex-direction: column;
@@ -146,7 +146,6 @@ hr {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    font-family: Arial, Helvetica, sans-serif;
     background-color: var(--brightred);
     padding: 30px;
     margin-bottom: 50px;
@@ -165,6 +164,17 @@ h2 {
     background-color: var(--blue);
     font-size: 50px;
     margin: 20px;
+}
+
+.feedback-container {
+    display: flex;
+    justify-content: center;
+}
+
+.feedback {
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
 }
 
 /*########################
@@ -231,7 +241,6 @@ input {
 .button-container button {
     border-radius: 7px;
     background-color: var(--blue);
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     font-weight: 600;
 }
@@ -240,6 +249,18 @@ input {
     color: var(--red);
     font-weight: 600;
     font-size: 20px;
+}
+
+/* For WebKit (Safari, Chrome) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Mozilla Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 /*########################
