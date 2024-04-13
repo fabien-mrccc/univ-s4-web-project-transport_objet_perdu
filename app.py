@@ -15,11 +15,11 @@ def home():
     return render_template('accueil.html', email=email_deleted)
 
 @app.get('/recuperer-objet-perdu')
-def recover_lost_object():
+def recover_lost_object_get():
     return render_template('recuperer_objet_perdu.html')
 
 @app.get('/ma-compagnie-de-transport')
-def my_transport_company():
+def my_transport_company_get():
     if 'email' in session:
         return render_template('ma_compagnie_de_transport.html')
     else:
@@ -65,7 +65,7 @@ def login_post():
     return redirect('/ma-compagnie-de-transport')
 
 @app.post('/deconnexion-compagnie-transport')
-def logout_post():
+def logout():
     session.clear()
     return redirect('/')
 
@@ -75,3 +75,15 @@ def delete_account():
     session.clear()
     session['email_deleted'] = email_deleted
     return redirect('/')
+
+@app.post('/ma-compagnie-de-transport')
+def my_transport_company_post():
+    email = request.form['email']
+    city = request.form['city']
+    postal_code = request.form['postal_code']
+    phone = request.form['tel']
+    address = request.form['address']
+    contact_page = request.form['contact_page']
+
+    model.save_contact(email, city, postal_code, phone, address, contact_page)
+    return redirect('/ma-compagnie-de-transport')
