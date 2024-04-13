@@ -64,12 +64,10 @@ def register_company_account(name, website, email, password, city, postal_code):
 
 def save_contact(email, city, postal_code, phone, address, contact_page):
     
-    city_id = db_fetch("SELECT ID FROM Ville WHERE Nom=?, CodePostal=?", (city, postal_code))
+    city_id = db_fetch("SELECT ID FROM Ville WHERE Nom=? AND CodePostal=?", (city, postal_code))
 
-    db_run("""
-           UPDATE InformationsDeContact SET Tel=?, Adresse=?, PageContact=? 
-           WHERE CompagnieDeTransport_Email=?, Ville_ID=?;""" 
-           (phone, address, contact_page, email, city_id['Ville_ID']))
+    db_run('UPDATE InformationsDeContact SET Tel=?, Adresse=?, PageContact=? WHERE CompagnieDeTransport_Email=? AND Ville_ID=?;',
+           (phone, address, contact_page, email, city_id['ID']))
     
 def delete_account(email):
 
@@ -92,3 +90,5 @@ def authentification(email, password):
     return email
   else:
     raise ValueError("Invalid email or password.")
+  
+
