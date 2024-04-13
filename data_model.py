@@ -48,18 +48,20 @@ def db_update(query, args=(), db_name=DBFILENAME):
 #########################
 
 
-def register_company_account(name, website, email, password, city, department):
+def register_company_account(company_name, website, email, password, city, department):
     
     email_in = db_fetch("SELECT 1 FROM User WHERE Email = ? LIMIT 1", (email,))
+
+    company_in = db_fetch("SELECT 1 FROM TransportCompany tc JOIN ContactInformation ci ON tc.ID = ci.Company_ID JOIN City c ON ci.City_ID = c.ID JOIN User u ON tc.User_Email = u.Email WHERE tc.Name = ? AND c.Name = ? AND c.Department = ? LIMIT 1", (company_name, city, department))
     
-    if email_in is not None:
-        raise ValueError("Email already exists.")
+    if email_in is not None or company_in is not None:
+        raise ValueError
     
     db_run('INSERT INTO User (Email, PasswordHash) VALUES (?, ?)', 
            (email, generate_password_hash(password)))
 
     db_run('INSERT INTO TransportCompany (Name, Website, User_Email) VALUES (?, ?, ?)', 
-           (name, website, email))
+           (company_name, website, email))
   
     city_id = get_city_id(city, department)
 
@@ -114,7 +116,7 @@ def get_cities():
 
 def get_companies_names():
 
-  companies = db_fetch("SELECT Name FROM TransportCompany;", all=True)
+  companies = db_fetch("SELECT DISTINCT Name FROM TransportCompany;", all=True)
   return [company['Name'] for company in companies]
 
 

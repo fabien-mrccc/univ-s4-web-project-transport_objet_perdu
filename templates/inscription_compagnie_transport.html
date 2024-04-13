@@ -6,7 +6,7 @@
             <button class="simple-size-button red-button blue-box-shadow" id="loginButton">Connexion</button>
         </div>
         {% if email_in %}
-            <p class ="error">⚠️ Cet email est déjà utilisé. ⚠️</p>
+            <p class ="error">⚠️ Cet email est déjà utilisé ou bien la compagnie renseignée est déjà présente sur l'application. ⚠️</p>
         {% endif %}
             <form action="/inscription-compagnie-transport" method="post">
                 <div class="sub-form-container">
