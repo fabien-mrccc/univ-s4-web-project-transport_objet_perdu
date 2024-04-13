@@ -16,7 +16,8 @@ def home():
 
 @app.get('/recuperer-objet-perdu')
 def recover_lost_object_get():
-    return render_template('recuperer_objet_perdu.html')
+
+    return render_template('recuperer_objet_perdu.html', is_submitted=False, informations=None)
 
 @app.get('/ma-compagnie-de-transport')
 def my_transport_company_get():
@@ -99,3 +100,11 @@ def my_transport_company_post():
 
     model.save_contact(email, city, postal_code, phone, address, contact_page)
     return redirect('/ma-compagnie-de-transport')
+
+@app.post('/recuperer-objet-perdu')
+def recover_lost_object_post():
+    company_name = request.form['company_name']
+    city = request.form['city']
+    department = request.form['department']
+    informations = model.get_contact(company_name=company_name, city = city, department= department)
+    return render_template('/recuperer-objet-perdu', is_submitted=True, informations=informations)

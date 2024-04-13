@@ -20,6 +20,19 @@
                 </div>
             </form>
         </div>
+        {% if is_submitted %}
+        <div class="informations-display" >
+            <p>
+                Numéro de contact : {{informations['Tel']}}
+            </p>
+            <p>
+                Adresse : {{informations['Adresse']}}
+            </p>
+            <p>
+                Page contact : {{informations['PageContact']}}
+            </p>
+        </div>
+        {% endif %}
     </div>
 
 {% include "footer.html" %}

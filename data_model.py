@@ -91,4 +91,11 @@ def authentification(email, password):
   else:
     raise ValueError("Invalid email or password.")
   
+def get_contact(company_name, city, department):
+  city_ID = db_fetch("SELECT ID FROM Ville WHERE Nom = ? AND Departement = ? ", (city,department))
+  email = db_fetch("SELECT Email FROM CompagnieDeTransport WHERE Nom = ?",(company_name,))
+  informations = db_fetch("SELECT Tel, Adresse, PageContact FROM InformationsDeContact WHERE CompagnieDeTransport_Email = ? AND Ville_ID = ? ", (email, city_ID['ID']))
+  return informations
+
+  
 
