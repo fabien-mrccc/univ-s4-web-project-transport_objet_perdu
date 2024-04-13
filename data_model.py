@@ -89,6 +89,12 @@ def delete_account(email):
     db_run("DELETE FROM TransportCompany WHERE User_Email=?", (email,))
     db_run("DELETE FROM User WHERE Email=?", (email,))
 
+    city = get_city(email)
+    city_in = db_fetch("SELECT 1 FROM ContactInformation WHERE City_ID = ? LIMIT 1", (city['ID'],))
+
+    if city_in is None:
+      db_run("DELETE FROM City WHERE ID = ?", (city['ID'],))
+
     return email
 
 
@@ -127,8 +133,12 @@ def get_company(email):
 
 def get_city(email):
     
-    city_ID = db_fetch("SELECT ci.City_ID AS ID FROM ContactInformation ci JOIN TransportCompany tc ON ci.Company_ID = tc.ID JOIN User u ON tc.User_Email = u.Email WHERE u.Email = ?;", (email,))
-    return db_fetch("SELECT * FROM City WHERE ID = ?;", (city_ID['ID'],))
+    company = get_company(email)
+    if company:
+        city_id = db_fetch("SELECT City_ID FROM ContactInformation WHERE Company_ID = ?", (company['ID'],))
+        if city_id:
+            return db_fetch("SELECT * FROM City WHERE ID = ?", (city_id['City_ID'],))
+    return None
     
 
 def get_city_id(name, department):
