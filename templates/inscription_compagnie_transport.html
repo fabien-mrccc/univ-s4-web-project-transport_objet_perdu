@@ -30,10 +30,15 @@
                     <div class="red-container sub-form">
                         <div>
                             <h3>Localisation :</h3>
+                            <label for="departements">Département :</label><br>
+                            <select name="departements" id="departements" required>
+                            {% for department in departments %}
+                                <option value="{{ department['nom'] }}">{{ department['code']}} - {{department['nom'] }}</option>
+                            {% endfor %}
+                            </select><br><br>
+
                             <label for="city">Ville :</label><br>
                             <input type="text" id="city" name="city" required><br><br>
-                            <label for="postal_code">Code postal :</label><br>
-                            <input type="number" id="postal_code" name="postal_code" min="0" required><br><br>
                         </div>
                     </div>
                 </div>

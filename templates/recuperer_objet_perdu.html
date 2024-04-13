@@ -6,25 +6,29 @@
         </div>
         <div class="basic-form">
             <form action="/recuperer-objet-perdu" method="post">
-                <label for="cities">Ville :</label><br>
-                <select name="cities" id="cities" required>
-                {% for city in cities %}
-                    <option value=city>city</option>
+                <label for="departements">Département :</label><br>
+                <select name="departements" id="departements" required>
+                {% for department in departments %}
+                    <option value="{{ department }}">{{ department['code']}} - {{department['nom'] }}</option>
                 {% endfor %}
                 </select><br><br>
-                  
-                <label for="postal_codes">Code postal :</label><br>
-                <select name="postal_codes" id="postal_codes" required>
-                {% for postal_code in postal_codes %}
-                    <option value=postal_code>postal_code</option>
-                {% endfor %}
+                
+                <label for="cities">Ville :</label><br>
+                <select name="cities" id="cities" required>
+                {% if cities %}
+                    {% for city in cities %}
+                        <option value="{{ city }}">{{ city }}</option>
+                    {% endfor %}
+                {% endif %}
                 </select><br><br>
 
                 <label for="companies_names">Nom de la compagnie :</label><br>
                 <select name="companies_names" id="companies_names" required>
-                {% for company_name in companies_names %}
-                    <option value=company_name>company_name</option>
-                {% endfor %}
+                {% if companies_names %}
+                    {% for company_name in companies_names %}
+                        <option value="{{ company_name }}">{{ company_name }}</option>
+                    {% endfor %}
+                {% endif %}
                 </select><br><br>
                 
                 <div class="button-container">
