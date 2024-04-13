@@ -1,9 +1,14 @@
 from flask import Flask, session, request, redirect, render_template, url_for
 import data_model as model
+import requests
 
 app = Flask(__name__)
 app.secret_key = b'6dbb6b3863634aa6a72270de16df48e666f2564fddcc5fe3c27effe4393a7f4b'
 
+apiUrl = "https://geo.api.gouv.fr/departements"
+response = requests.get(apiUrl)
+
+departments = response.json()
 
 ########################
 #      GET ROUTES      #
@@ -16,8 +21,14 @@ def home():
 
 @app.get('/recuperer-objet-perdu')
 def recover_lost_object_get():
+    cities = model.db_fetch("SELECT Nom FROM Ville;", all=True)
 
-    return render_template('recuperer_objet_perdu.html', is_submitted=False, informations=None)
+    cities_names = [city['Nom'] for city in cities]
+    
+    companies = model.db_fetch("SELECT Nom FROM CompagnieDeTransport;", all=True)
+    companies_names = [company['Nom'] for company in companies]
+
+    return render_template('recuperer_objet_perdu.html', cities=cities_names, departments=departments, companies_names=companies_names, is_submitted=False, informations=None)
 
 @app.get('/ma-compagnie-de-transport')
 def my_transport_company_get():
@@ -28,13 +39,13 @@ def my_transport_company_get():
 
         city_ID = model.db_fetch("SELECT Ville_ID FROM InformationsDeContact WHERE CompagnieDeTransport_Email = ?;", (email,))
         city = model.db_fetch("SELECT Nom FROM Ville WHERE ID = ?;", (city_ID['Ville_ID'],))
-        postal_code = model.db_fetch("SELECT CodePostal FROM Ville WHERE ID = ?;", (city_ID['Ville_ID'],))
+        department = model.db_fetch("SELECT Departement FROM Ville WHERE ID = ?;", (city_ID['Ville_ID'],))
 
         phone_number = model.db_fetch("SELECT Tel FROM InformationsDeContact WHERE CompagnieDeTransport_Email = ? AND Ville_ID = ?;", (email,city_ID['Ville_ID']))
         address = model.db_fetch("SELECT Adresse FROM InformationsDeContact WHERE CompagnieDeTransport_Email = ? AND Ville_ID = ?;", (email,city_ID['Ville_ID']))
         contact_page = model.db_fetch("SELECT PageContact FROM InformationsDeContact WHERE CompagnieDeTransport_Email = ? AND Ville_ID = ?;", (email,city_ID['Ville_ID']))
 
-        return render_template('ma_compagnie_de_transport.html', company_name = company_name['Nom'], website = website['SiteWeb'], email=email, city = city['Nom'], postal_code = postal_code['CodePostal'], phone_number = phone_number['Tel'], address = address['Adresse'], contact_page = contact_page['PageContact'])
+        return render_template('ma_compagnie_de_transport.html', company_name = company_name['Nom'], website = website['SiteWeb'], email=email, city = city['Nom'], department = department['Departement'], phone_number = phone_number['Tel'], address = address['Adresse'], contact_page = contact_page['PageContact'])
     else:
         return redirect('/connexion-compagnie-transport')
 
@@ -44,7 +55,8 @@ def login_get():
 
 @app.get('/inscription-compagnie-transport')
 def register_get():
-    return render_template('inscription_compagnie_transport.html', email_in=False)
+
+    return render_template('inscription_compagnie_transport.html', email_in=False, departments = departments)
 
 
 ########################
@@ -58,11 +70,11 @@ def register_post():
     email = request.form["email"].strip()
     password = request.form["password"].strip()
     city = request.form["city"].strip()
-    postal_code = request.form["postal_code"].strip()
+    department = request.form["departements"].strip()
     try:
-        model.register_company_account(name, website, email, password, city, postal_code)
+        model.register_company_account(name, website, email, password, city, department)
     except ValueError:
-        return render_template('inscription_compagnie_transport.html', email_in=True)
+        return render_template('inscription_compagnie_transport.html', email_in=True, departments = departments)
     return redirect('/connexion-compagnie-transport')
 
 @app.post('/connexion-compagnie-transport')
@@ -93,12 +105,12 @@ def delete_account():
 def my_transport_company_post():
     email = request.form['email']
     city = request.form['city']
-    postal_code = request.form['postal_code']
+    department = request.form['department']
     phone = request.form['phone_number']
     address = request.form['address']
     contact_page = request.form['contact_page']
 
-    model.save_contact(email, city, postal_code, phone, address, contact_page)
+    model.save_contact(email, city, department, phone, address, contact_page)
     return redirect('/ma-compagnie-de-transport')
 
 @app.post('/recuperer-objet-perdu')

@@ -43,7 +43,7 @@ def db_update(query, args=(), db_name=DBFILENAME):
 #  
 # END Utility functions 
  
-def register_company_account(name, website, email, password, city, postal_code):
+def register_company_account(name, website, email, password, city, department):
 
   email_in = db_fetch("SELECT 1 FROM CompagnieDeTransport WHERE email = ? LIMIT 1", (email,))
     
@@ -53,18 +53,18 @@ def register_company_account(name, website, email, password, city, postal_code):
   db_run('INSERT INTO CompagnieDeTransport (Nom, SiteWeb, Email, MotDePasseHash) VALUES (?,?,?,?)',
          (name, website, email, generate_password_hash(password)))
   
-  city_in = db_fetch("SELECT 1 FROM Ville WHERE Nom = ? AND CodePostal = ? LIMIT 1" , (city, postal_code))
+  city_in = db_fetch("SELECT 1 FROM Ville WHERE Nom = ? AND Departement = ? LIMIT 1" , (city, department))
 
   if city_in is None:
-    db_run('INSERT INTO Ville (Nom, CodePostal) VALUES (?,?)', (city, postal_code))
+    db_run('INSERT INTO Ville (Nom, Departement) VALUES (?,?)', (city, department))
   
-  city_dict = db_fetch("SELECT ID FROM Ville WHERE Nom = ? AND CodePostal = ?;", (city, postal_code))
+  city_dict = db_fetch("SELECT ID FROM Ville WHERE Nom = ? AND Departement = ?;", (city, department))
 
   db_run('INSERT INTO InformationsDeContact (CompagnieDeTransport_Email, Ville_ID) VALUES (?,?)', (email, city_dict['ID']))
 
-def save_contact(email, city, postal_code, phone, address, contact_page):
+def save_contact(email, city, department, phone, address, contact_page):
     
-    city_id = db_fetch("SELECT ID FROM Ville WHERE Nom=? AND CodePostal=?", (city, postal_code))
+    city_id = db_fetch("SELECT ID FROM Ville WHERE Nom=? AND Departement=?", (city, department))
 
     db_run('UPDATE InformationsDeContact SET Tel=?, Adresse=?, PageContact=? WHERE CompagnieDeTransport_Email=? AND Ville_ID=?;',
            (phone, address, contact_page, email, city_id['ID']))
