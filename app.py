@@ -16,7 +16,10 @@ def home():
 
 @app.get('/recuperer-objet-perdu')
 def recover_lost_object_get():
-    return render_template('recuperer_objet_perdu.html')
+    cities = model.db_fetch("SELECT Nom, CodePostal FROM Ville;")
+    companies_names = model.db_fetch("SELECT cdt.Nom FROM CompagnieDeTransport cdt JOIN InformationsDeContact ic ON cdt.Email = ic.CompagnieDeTransport_Email JOIN Ville v ON ic.Ville_ID = v.ID WHERE v.Nom = 'NomDeLaVille' AND v.CodePostal = 'CodePostalDeLaVille';")
+
+    return render_template('recuperer_objet_perdu.html', cities = cities['Nom'], postal_codes = cities['CodePostal'], companies_names = companies_names['cdt.Nom'])
 
 @app.get('/ma-compagnie-de-transport')
 def my_transport_company_get():

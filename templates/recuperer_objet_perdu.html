@@ -6,16 +6,25 @@
         </div>
         <div class="basic-form">
             <form action="/recuperer-objet-perdu" method="post">
-                <label for="city">Ville :</label><br>
+                <label for="cities">Ville :</label><br>
                 <select name="cities" id="cities" required>
+                {% for city in cities %}
+                    <option value=city>city</option>
+                {% endfor %}
                 </select><br><br>
                   
-                <label for="postal_code">Code postal :</label><br>
-                <select name="postal_code" id="postal_code" required>
+                <label for="postal_codes">Code postal :</label><br>
+                <select name="postal_codes" id="postal_codes" required>
+                {% for postal_code in postal_codes %}
+                    <option value=postal_code>postal_code</option>
+                {% endfor %}
                 </select><br><br>
 
-                <label for="company_name">Nom de la compagnie :</label><br>
-                <select name="company_name" id="company_name" required>
+                <label for="companies_names">Nom de la compagnie :</label><br>
+                <select name="companies_names" id="companies_names" required>
+                {% for company_name in companies_names %}
+                    <option value=company_name>company_name</option>
+                {% endfor %}
                 </select><br><br>
                 
                 <div class="button-container">
