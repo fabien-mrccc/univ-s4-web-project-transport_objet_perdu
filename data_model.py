@@ -62,11 +62,11 @@ def register_company_account(name, website, email, password, city, postal_code):
 
   db_run('INSERT INTO InformationsDeContact (CompagnieDeTransport_Email, Ville_ID) VALUES (?,?)', (email, city_dict['ID']))
 
-def save_contact(company_id, city_id, phone, address, contact_page):
+def save_contact(email, city_id, phone, address, contact_page):
     db_run("""
            UPDATE InformationsDeContact SET Tel=?, Adresse=?, PageContact=? 
-           WHERE CompagnieDeTransport_ID=? AND Ville_ID=?;""" 
-           (phone, address, contact_page, company_id, city_id))
+           WHERE CompagnieDeTransport_Email=? AND Ville_ID=?;""" 
+           (phone, address, contact_page, email, city_id))
     
 def delete_account(email):
 
