@@ -13,7 +13,15 @@ def load(db_name=DBFILENAME):
   db_run('DROP TABLE IF EXISTS Ville')
   db_run('DROP TABLE IF EXISTS InformationsDeContact')
 
-  db_run('CREATE TABLE CompagnieDeTransport ( Email TEXT PRIMARY KEY, MotDePasseHash TEXT, Nom TEXT, SiteWeb TEXT)')
+  db_run("""
+         CREATE TABLE CompagnieDeTransport ( 
+              Email TEXT PRIMARY KEY, 
+              MotDePasseHash TEXT, 
+              Nom TEXT, 
+              SiteWeb TEXT,
+              Ville_ID INTEGER,
+              FOREIGN KEY (Ville_ID) REFERENCES Ville(ID))
+         """)
   db_run('CREATE TABLE Ville (ID INTEGER PRIMARY KEY AUTOINCREMENT, Nom TEXT, Departement TEXT)')
   db_run("""
           CREATE TABLE InformationsDeContact (

@@ -115,8 +115,8 @@ def my_transport_company_post():
 
 @app.post('/recuperer-objet-perdu')
 def recover_lost_object_post():
-    company_name = request.form['company_name']
-    city = request.form['city']
-    department = request.form['department']
+    company_name = request.form['companies_names']
+    city = request.form['cities']
+    department = request.form['departments']
     informations = model.get_contact(company_name=company_name, city = city, department= department)
     return render_template('/recuperer-objet-perdu', is_submitted=True, informations=informations)
