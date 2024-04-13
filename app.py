@@ -21,7 +21,19 @@ def recover_lost_object_get():
 @app.get('/ma-compagnie-de-transport')
 def my_transport_company_get():
     if 'email' in session:
-        return render_template('ma_compagnie_de_transport.html')
+        email = session['email']
+        company_name = model.db_fetch("SELECT Nom FROM CompagnieDeTransport WHERE Email = ?;", (email,))
+        website = model.db_fetch("SELECT SiteWeb FROM CompagnieDeTransport WHERE Email = ?;", (email,))
+
+        city_ID = model.db_fetch("SELECT Ville_ID FROM InformationsDeContact WHERE CompagnieDeTransport_Email = ?;", (email,))
+        city = model.db_fetch("SELECT Nom FROM Ville WHERE ID = ?;", (city_ID['Ville_ID'],))
+        postal_code = model.db_fetch("SELECT CodePostal FROM Ville WHERE ID = ?;", (city_ID['Ville_ID'],))
+
+        phone_number = model.db_fetch("SELECT Tel FROM InformationsDeContact WHERE CompagnieDeTransport_Email = ? AND Ville_ID = ?;", (email,city_ID['Ville_ID']))
+        address = model.db_fetch("SELECT Adresse FROM InformationsDeContact WHERE CompagnieDeTransport_Email = ? AND Ville_ID = ?;", (email,city_ID['Ville_ID']))
+        contact_page = model.db_fetch("SELECT PageContact FROM InformationsDeContact WHERE CompagnieDeTransport_Email = ? AND Ville_ID = ?;", (email,city_ID['Ville_ID']))
+
+        return render_template('ma_compagnie_de_transport.html', company_name = company_name['Nom'], website = website['SiteWeb'], email=email, city = city['Nom'], postal_code = postal_code['CodePostal'], phone_number = phone_number['Tel'], address = address['Adresse'], contact_page = contact_page['PageContact'])
     else:
         return redirect('/connexion-compagnie-transport')
 
@@ -81,7 +93,7 @@ def my_transport_company_post():
     email = request.form['email']
     city = request.form['city']
     postal_code = request.form['postal_code']
-    phone = request.form['tel']
+    phone = request.form['phone_number']
     address = request.form['address']
     contact_page = request.form['contact_page']
 
