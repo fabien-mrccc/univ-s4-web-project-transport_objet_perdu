@@ -63,25 +63,29 @@ button {
     border: 3px solid black;
     color: white;
     font-weight: 500;
+    padding: 5px;
 }
 
 button:hover {
     cursor: pointer;
 }
 
-.blue-button {
-    background-color: var(--blue);
-}
-
-.red-button {
-    background-color: var(--red);
-}
-
 .simple-size-button {
     font-size: 20px;
     margin: 20px;
     border-radius: 5px;
-    padding: 5px;
+}
+
+.button-container {
+    margin: 10px 0 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.button-container button {
+    border-radius: 7px;
+    font-size: 20px;
+    font-weight: 600;
 }
 
 /*########################
@@ -161,7 +165,6 @@ hr {
 h2 {
     padding: 20px 15px 20px 15px;
     border-radius: 20px;
-    background-color: var(--blue);
     font-size: 50px;
     margin: 20px;
 }
@@ -193,10 +196,17 @@ h2 {
     justify-content: flex-start;
     align-items: center;
     border-radius: 20px;
-    background-color: var(--red);
     color: white;
     font-size: 25px; 
     margin: 20px;
+}
+
+.red-container, .red-button, .basic-form {
+    background-color: var(--red);
+}
+
+.blue-container, .blue-button, h2, .button-container button {
+    background-color: var(--blue);
 }
 
 .basic-form {
@@ -207,7 +217,6 @@ h2 {
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    background-color: var(--red);
     color: white;
     font-size: 25px;
     margin: 20px;
@@ -229,20 +238,6 @@ h2 {
 
 input {
     font-size: 18px;
-}
-
-.button-container {
-    margin: 10px 0 10px 0;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-}
-
-.button-container button {
-    border-radius: 7px;
-    background-color: var(--blue);
-    font-size: 20px;
-    font-weight: 600;
 }
 
 .error {
