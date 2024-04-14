@@ -83,15 +83,15 @@ def save_contact(email, city, department, phone, address, contact_page):
 
     
 def delete_account(email):
+  
+    city = get_city(email)
     
     company = get_company(email)
     db_run("DELETE FROM ContactInformation WHERE Company_ID=?", (company['ID'],))
     db_run("DELETE FROM TransportCompany WHERE User_Email=?", (email,))
     db_run("DELETE FROM User WHERE Email=?", (email,))
 
-    city = get_city(email)
     city_in = db_fetch("SELECT 1 FROM ContactInformation WHERE City_ID = ? LIMIT 1", (city['ID'],))
-
     if city_in is None:
       db_run("DELETE FROM City WHERE ID = ?", (city['ID'],))
 
