@@ -116,16 +116,6 @@ def get_contact(company_name, city, department):
     return informations
 
 
-def get_cities():
-
-  return db_fetch("SELECT * FROM City;", all=True)
-
-def get_companies_names():
-
-  companies = db_fetch("SELECT DISTINCT Name FROM TransportCompany;", all=True)
-  return [company['Name'] for company in companies]
-
-
 def get_company(email):
 
   return db_fetch("SELECT * FROM TransportCompany WHERE User_Email = ?;", (email,))
@@ -150,4 +140,7 @@ def get_city_id(name, department):
 def get_contact_info(company_ID, city_ID):
   
   return db_fetch("SELECT * FROM ContactInformation WHERE Company_ID = ? AND City_ID = ?;", (company_ID, city_ID))
+
+def get_recovery_sites():
+   return db_fetch("SELECT tc.Name AS Name, c.Department AS Department, c.Name AS City FROM ContactInformation ci JOIN TransportCompany tc ON ci.Company_ID = tc.ID JOIN City c ON ci.City_ID = c.ID ORDER BY Name;", all=True)
 
