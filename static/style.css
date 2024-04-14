@@ -8,6 +8,7 @@
     --red: #ed4f35;
     --brightred: #f7efed;
     --gray: gray;
+    --green: rgb(15, 179, 15);
 }
 
 body, html {
@@ -209,6 +210,10 @@ h2 {
     background-color: var(--blue);
 }
 
+.green-container {
+    background-color: var(--green);
+}
+
 .basic-form {
     padding: 40px 0 40px 0;
     width: 350px;
@@ -248,7 +253,7 @@ input, select {
     font-size: 15px;
 }
 
-#recuperer-objet-perdu {
+#recuperer-objet-perdu-page {
     width: 380px;
 }
 
