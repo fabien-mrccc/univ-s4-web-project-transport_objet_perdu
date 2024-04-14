@@ -6,13 +6,13 @@
             <button class="simple-size-button red-button blue-box-shadow" id="loginButton">Connexion</button>
         </div>
         {% if email_in %}
-            <p class ="error">⚠️ Cet email est déjà utilisé ou bien la compagnie renseignée est déjà présente sur l'application. ⚠️</p>
+            <p class ="error">⚠️ Cet email est déjà utilisé ou bien le lieu de récupération est déjà renseigné sur l'application. ⚠️</p>
         {% endif %}
             <form action="/inscription-compagnie-transport" method="post">
                 <div class="sub-form-container">
                     <div class="red-container sub-form">
                         <div>
-                            <h3>Information de compte :</h3>
+                            <h3>Informations du compte TOP</h3>
 
                             <label for="company_name">Nom de la compagnie :</label><br>
                             <input type="text" id="company_name" name="company_name" required><br><br>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="red-container sub-form">
                         <div>
-                            <h3>Localisation :</h3>
+                            <h3>Localisation du lieu de récupération</h3>
                             <label for="departments">Département :</label><br>
                             <select name="departments" id="departments" required>
                             {% for department in departments %}
