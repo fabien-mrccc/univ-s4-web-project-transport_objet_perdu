@@ -24,10 +24,8 @@ def home():
 
 @app.get('/recuperer-objet-perdu')
 def recover_lost_object_get():
-
-    cities = model.get_cities()
-    companies_names = model.get_companies_names()
-    return render_template('recuperer_objet_perdu.html', cities=cities, companies_names=companies_names, is_submitted=False, informations=None)
+    recovery_sites = model.get_recovery_sites()
+    return render_template('recuperer_objet_perdu.html', recovery_sites=recovery_sites, is_submitted=False, informations=None)
 
 
 @app.get('/ma-compagnie-de-transport')
@@ -112,8 +110,9 @@ def my_transport_company_post():
 
 @app.post('/recuperer-objet-perdu')
 def recover_lost_object_post():
-    company_name = request.form['companies_names']
-    city = request.form['cities']
-    department = request.form['departments']
+    recovery_sites = request.form['recovery-sites']
+    company_name = None
+    city = None
+    department = None
     informations = model.get_contact(company_name=company_name, city = city, department= department)
-    return render_template('/recuperer-objet-perdu', is_submitted=True, informations=informations)
+    return render_template('/recuperer-objet-perdu', recovery_sites=recovery_sites,is_submitted=True, informations=informations)
