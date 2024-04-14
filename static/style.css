@@ -4,11 +4,10 @@
 
 :root {
     --blue: #3b71d0;
-    --brightblue: #7398d7;
     --red: #ed4f35;
     --brightred: #f7efed;
     --gray: gray;
-    --green: rgb(15, 179, 15);
+    --green: #4caf50;
 }
 
 body, html {
