@@ -10,6 +10,7 @@ response = requests.get(apiUrl)
 
 departments = response.json()
 
+
 ########################
 #      GET ROUTES      #
 ########################
