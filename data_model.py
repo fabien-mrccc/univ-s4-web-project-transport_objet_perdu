@@ -112,8 +112,8 @@ def get_contact(company_name, city, department):
     
     city_id = get_city_id(city, department)
     company_id = db_fetch("SELECT ID FROM TransportCompany WHERE Name = ?", (company_name,))
-    informations = db_fetch("SELECT Phone, Address, ContactPage FROM ContactInformation WHERE Company_ID = ? AND City_ID = ? ", (company_id['ID'], city_id['ID']))
-    return informations
+    contact_info = db_fetch("SELECT tc.Name as Name, c.Department AS Department, c.Name AS City, ci.Phone AS Phone, ci.Address AS Address, ci.ContactPage AS ContactPage, tc.Website AS Website FROM ContactInformation ci JOIN TransportCompany tc ON ci.Company_ID = tc.ID JOIN City c ON ci.City_ID = c.ID WHERE Company_ID = ? AND City_ID = ?;", (company_id['ID'], city_id['ID']))
+    return contact_info
 
 
 def get_company(email):
