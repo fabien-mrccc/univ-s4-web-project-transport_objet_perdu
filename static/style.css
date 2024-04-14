@@ -248,6 +248,10 @@ input, select {
     font-size: 15px;
 }
 
+#recuperer-objet-perdu {
+    width: 380px;
+}
+
 /*########################
 #        RESPONSIVE      #
 ########################*/

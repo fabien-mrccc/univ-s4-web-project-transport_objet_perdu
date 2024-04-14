@@ -4,23 +4,13 @@
         <div class="h2-container">
             <h2>RÉCUPÉRER MON OBJET PERDU</h2>
         </div>
-        <div class="basic-form">
+        <div class="basic-form" id="recuperer-objet-perdu">
             <form action="/recuperer-objet-perdu" method="post">
-                
-                <label for="cities">Ville :</label><br>
-                <select name="cities" id="cities" required>
-                {% if cities %}
-                    {% for city in cities %}
-                        <option value="{{ city['Name'] }}, {{ city['Department'] }}">{{ city['Name'] }}, {{ city['Department'] }}</option>
-                    {% endfor %}
-                {% endif %}
-                </select><br><br>
-
-                <label for="companies_names">Nom de la compagnie :</label><br>
-                <select name="companies_names" id="companies_names" required>
-                {% if companies_names %}
-                    {% for company_name in companies_names %}
-                        <option value="{{ company_name }}">{{ company_name }}</option>
+                <h3>Sélectionner votre lieu de récupération :</h3>
+                <select name="recovery-sites" id="recovery-sites" required>
+                {% if recovery_sites %}
+                    {% for site in recovery_sites %}
+                        <option id="recovery-sites" value="{{ site['Name'] }} | {{ site['City'] }}, {{ site['Department'] }}">{{ site['Name'] }} | {{ site['City'] }}, {{ site['Department'] }}</option>
                     {% endfor %}
                 {% endif %}
                 </select><br><br>
