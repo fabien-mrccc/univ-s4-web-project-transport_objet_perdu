@@ -52,7 +52,12 @@ def register_company_account(company_name, website, email, password, city, depar
     
     email_in = db_fetch("SELECT 1 FROM User WHERE Email = ? LIMIT 1", (email,))
 
-    company_in = db_fetch("SELECT 1 FROM TransportCompany tc JOIN ContactInformation ci ON tc.ID = ci.Company_ID JOIN City c ON ci.City_ID = c.ID JOIN User u ON tc.User_Email = u.Email WHERE tc.Name = ? AND c.Name = ? AND c.Department = ? LIMIT 1", (company_name, city, department))
+    company_in = db_fetch("""SELECT 1 FROM TransportCompany tc 
+                          JOIN ContactInformation ci ON tc.ID = ci.Company_ID 
+                          JOIN City c ON ci.City_ID = c.ID 
+                          JOIN User u ON tc.User_Email = u.Email 
+                          WHERE tc.Name = ? AND c.Name = ? AND c.Department = ? LIMIT 1""", 
+                          (company_name, city, department))
     
     if email_in is not None or company_in is not None:
         raise ValueError
@@ -70,7 +75,9 @@ def register_company_account(company_name, website, email, password, city, depar
   
     city_id = db_fetch("SELECT ID FROM City WHERE Name = ? AND Department = ?", (city, department))
 
-    db_run('INSERT INTO ContactInformation (Company_ID, City_ID) VALUES ((SELECT ID FROM TransportCompany WHERE User_Email = ?), ?)', (email, city_id['ID']))
+    company = get_company(email)
+    db_run("""INSERT INTO ContactInformation (Company_ID, City_ID) 
+           VALUES (?, ?)""", (company['ID'], city_id['ID']))
 
 
 def save_contact(email, city, department, phone, address, contact_page):
@@ -78,7 +85,8 @@ def save_contact(email, city, department, phone, address, contact_page):
     city_id = get_city_id(city, department)
     company = get_company(email)
 
-    db_run('UPDATE ContactInformation SET Phone=?, Address=?, ContactPage=? WHERE Company_ID=? AND City_ID=?;',
+    db_run("""UPDATE ContactInformation SET Phone=?, Address=?, ContactPage=? 
+           WHERE Company_ID=? AND City_ID=?;""",
            (phone, address, contact_page, company['ID'], city_id['ID']))
 
     
@@ -111,8 +119,18 @@ def authentification(email, password):
 def get_contact(company_name, city, department):
     
     city_id = get_city_id(city, department)
-    company_id = db_fetch("SELECT ID FROM TransportCompany WHERE Name = ?", (company_name,))
-    contact_info = db_fetch("SELECT tc.Name as Name, c.Department AS Department, c.Name AS City, ci.Phone AS Phone, ci.Address AS Address, ci.ContactPage AS ContactPage, tc.Website AS Website FROM ContactInformation ci JOIN TransportCompany tc ON ci.Company_ID = tc.ID JOIN City c ON ci.City_ID = c.ID WHERE Company_ID = ? AND City_ID = ?;", (company_id['ID'], city_id['ID']))
+    print(city_id)
+    contact_info = db_fetch("""SELECT tc.Name as Name, 
+                            c.Department AS Department, 
+                            c.Name AS City, 
+                            ci.Phone AS Phone, 
+                            ci.Address AS Address, 
+                            ci.ContactPage AS ContactPage, 
+                            tc.Website AS Website 
+                            FROM ContactInformation ci 
+                            JOIN TransportCompany tc ON ci.Company_ID = tc.ID 
+                            JOIN City c ON ci.City_ID = c.ID 
+                            WHERE tc.Name = ? AND City_ID = ?;""", (company_name, city_id['ID']))
     return contact_info
 
 
@@ -139,8 +157,15 @@ def get_city_id(name, department):
 
 def get_contact_info(company_ID, city_ID):
   
-  return db_fetch("SELECT * FROM ContactInformation WHERE Company_ID = ? AND City_ID = ?;", (company_ID, city_ID))
+  return db_fetch("SELECT * FROM ContactInformation WHERE Company_ID = ? AND City_ID = ?;", 
+                  (company_ID, city_ID))
 
 def get_recovery_sites():
-   return db_fetch("SELECT tc.Name AS Name, c.Department AS Department, c.Name AS City FROM ContactInformation ci JOIN TransportCompany tc ON ci.Company_ID = tc.ID JOIN City c ON ci.City_ID = c.ID ORDER BY Name;", all=True)
+   
+   return db_fetch("""SELECT tc.Name AS Name, 
+                   c.Department AS Department, 
+                   c.Name AS City 
+                   FROM ContactInformation ci 
+                   JOIN TransportCompany tc ON ci.Company_ID = tc.ID 
+                   JOIN City c ON ci.City_ID = c.ID ORDER BY Name;""", all=True)
 

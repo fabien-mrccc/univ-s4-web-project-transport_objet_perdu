@@ -144,7 +144,7 @@ def recover_lost_object_post():
     city_department = parts[1].split(', ')  
     city = city_department[0]
     department = city_department[1]
- 
+
     contact_info = model.get_contact(company_name, city, department)
     updated_contact_info = update_contact_info(contact_info, "Aucune information fournie")
 
