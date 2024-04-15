@@ -1,0 +1,52 @@
+{% include "header.html" %}
+
+    <div class="main-container">
+        <div class="h2-container">
+            <h2>INSCRIPTION</h2>
+            <button class="simple-size-button red-button blue-box-shadow" id="loginButton">Connexion</button>
+        </div>
+        {% if email_in %}
+            <p class ="error">⚠️ Cet email est déjà utilisé ou bien le lieu de récupération est déjà renseigné sur l'application. ⚠️</p>
+        {% endif %}
+            <form action="/inscription-compagnie-transport" method="post">
+                <div class="sub-form-container">
+                    <div class="red-container sub-form">
+                        <div>
+                            <h3>Informations du compte TOP</h3>
+
+                            <label for="company_name">Nom de la compagnie :</label><br>
+                            <input type="text" id="company_name" name="company_name" required><br><br>
+    
+                            <label for="website">Site web :</label><br>
+                            <input type="url" id="website" name="website" required><br><br>
+    
+                            <label for="email">Mon email :</label><br>
+                            <input type="email" id="email" name="email" required><br><br>
+                            
+                            <label for="password">Mon mot de passe :</label><br>
+                            <input type="password" id="password" name="password" required><br><br>
+                        </div>
+                    </div>
+                    <div class="red-container sub-form">
+                        <div>
+                            <h3>Localisation du lieu de récupération</h3>
+                            <label for="departments">Département :</label><br>
+                            <select name="departments" id="departments" required>
+                            {% for department in departments %}
+                                <option value="{{ department['nom']}} ({{ department['code']}})">{{ department['code']}} - {{department['nom'] }}</option>
+                            {% endfor %}
+                            </select><br><br>
+
+                            <label for="city">Ville :</label><br>
+                            <input type="text" id="city" name="city" required><br><br>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button class="blue-button blue-box-shadow" id="registerFormButton" type="submit">M'inscrire</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% include "footer.html" %}

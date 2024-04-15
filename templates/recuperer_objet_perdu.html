@@ -1,0 +1,66 @@
+{% include "header.html" %}
+
+    <div class="main-container">
+        <div class="h2-container">
+            <h2>RÉCUPÉRER MON OBJET PERDU</h2>
+        </div>
+        {% if recovery_sites %}
+        <div class="basic-form" id="recuperer-objet-perdu-page">
+            <form action="/recuperer-objet-perdu" method="post">
+                <h3>Sélectionner votre lieu de récupération :</h3>
+                <select name="recovery-sites" id="recovery-sites" required>
+                
+                    {% for site in recovery_sites %}
+                        <option id="recovery-sites" value="{{ site['Name'] }} | {{ site['City'] }}, {{ site['Department'] }}">{{ site['Name'] }} | {{ site['City'] }}, {{ site['Department'] }}</option>
+                    {% endfor %}
+
+                </select><br><br>
+                
+                <div class="button-container">
+                    <button class="blue-button blue-box-shadow" id="recoveryFormButton" type="submit">Soumettre</button>
+                </div>
+            </form>
+        </div>
+        {% else %}
+        <form action="/" method="get">
+            <div class="sub-form-container">
+                <div class="blue-container sub-form">
+                    <div>
+                        <h3>Votre compagnie de transport</h3>
+
+                        <label for="company_name">Nom de la compagnie :</label><br>
+                        <input type="text" id="company_name" name="company_name" value="{{contact_info['Name']}}" readonly><br><br>
+
+                        <label for="website">Site web :</label><br>
+                        <input type="url" id="website" name="web" value="{{contact_info['Website']}}" readonly><br><br>
+                        
+                        <label for="city">Ville :</label><br>
+                        <input type="text" id="city" name="city" value="{{ contact_info['City'] }}, {{ contact_info['Department'] }}" readonly><br><br>
+
+                    </div>
+                </div>
+                <div class="green-container sub-form">
+                    <div>
+
+                        <h3>Coordonnées de contact</h3>
+
+                        <label for="phone_number">Numéro de téléphone :</label><br>
+                        <input type="tel" id="phone_number" name="phone_number" value="{{contact_info['Phone']}}" readonly><br><br>
+
+                        <label for="address">Adresse :</label><br>
+                        <input type="text" id="address" name="address" value="{{contact_info['Address']}}" readonly><br><br>
+
+                        <label for="contact_page">Lien page de contact :</label><br>
+                        <input type="url" id="contact_page" name="contact_page" value="{{contact_info['ContactPage']}}" readonly><br><br>
+
+                    </div>
+                    <div class="button-container">
+                        <button class="blue-button red-box-shadow" type="submit">Revenir à l'Accueil</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+
+{% include "footer.html" %}

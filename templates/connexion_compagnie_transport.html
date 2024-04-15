@@ -1,0 +1,26 @@
+{% include "header.html" %}
+
+    <div class="main-container">
+        <div class="h2-container">
+            <h2>CONNEXION</h2>
+            <button class="simple-size-button red-button blue-box-shadow" id="registerButton">Inscription</button>
+        </div>
+        {% if email_in %}
+        <p class ="error">⚠️ Email ou mot de passe incorrect. ⚠️</p>
+        {% endif %}
+        <div class="basic-form">
+            <form action="/connexion-compagnie-transport" method="post">
+                <label for="email">Email :</label><br>
+                <input type="email" id="email" name="email" required><br><br>
+
+                <label for="password">Mot de passe :</label><br>
+                <input type="password" id="password" name="password" required><br><br>
+                
+                <div class="button-container">
+                    <button class="blue-button blue-box-shadow" id="loginFormButton" type="submit">Me connecter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% include "footer.html" %}

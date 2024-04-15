@@ -1,0 +1,294 @@
+/*########################
+#     GLOBAL ASPECTS     #
+########################*/
+
+:root {
+    --blue: #3b71d0;
+    --red: #ed4f35;
+    --brightred: #f7efed;
+    --gray: gray;
+    --green: #4caf50;
+    --white: white;
+    --black: black;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: var(--white);
+}
+
+/*BEGIN HEADER*/
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo img {
+    height: 10em;
+    margin-top: 20px;
+    border-radius: 100px;
+    border: 3px solid var(--blue);
+    box-shadow: 2px 2px var(--blue);
+}
+
+.logo img:hover {
+    box-shadow: 2px 2px var(--red);
+}
+
+.logo img:active {
+    box-shadow: 0px 0px var(--red);
+}
+/* END HEADER*/
+
+footer {
+    height: 50px;
+    color: var(--gray);
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--white);
+}
+
+/*#################
+#     BUTTONS     #
+#################*/
+
+button {
+    border: 3px solid var(--black);
+    font-weight: 500;
+    padding: 5px;
+    color: var(--white);
+    font-size: 20px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.simple-size-button {
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.button-container {
+    margin: 10px 0 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.button-container button {
+    border-radius: 7px;
+    font-weight: 600;
+}
+
+/*###############################
+#     SHADOWS AND HR(LINES)     #
+###############################*/
+
+hr {
+    width: 80vw;
+    margin-top: 20px;
+}
+
+.blue-box-shadow, .blue-box-shadow:hover {
+    box-shadow: 6px 6px var(--blue);
+}
+
+.blue-box-shadow:active {
+    box-shadow: 3px 3px var(--blue);
+}
+
+.red-box-shadow, .red-box-shadow:hover {
+    box-shadow: 6px 6px var(--red);
+}
+
+.red-box-shadow:active {
+    box-shadow: 3px 3px var(--red);
+}
+
+/*###################
+#     HOME PAGE     #
+###################*/
+
+.home-buttons {
+    height: 70%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.home-button {
+    height: 50vh; 
+    width: 40vw;
+    font-size: 40px;
+    padding: 3vw;
+    margin: 20px;
+    border-radius: 20px;
+}
+
+/*########################
+#     MAIN CONTAINER     #
+########################*/
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--brightred);
+    padding: 30px;
+    margin-bottom: 50px;
+}
+
+.h2-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--brightred);
+}
+
+h2 {
+    padding: 20px 15px 20px 15px;
+    border-radius: 20px;
+    font-size: 50px;
+    margin: 20px;
+}
+
+.feedback-container {
+    display: flex;
+    justify-content: center;
+}
+
+.feedback {
+    font-weight: 600;
+    text-align: center;
+    color: var(--green)
+}
+
+/*######################
+#     GENERAL FORM     #
+######################*/
+
+.sub-form-container {
+    display: flex;
+}
+
+.sub-form {
+    padding: 40px 0 40px 0;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 20px;
+    font-size: 25px; 
+    margin: 20px;
+}
+
+.red-container, .red-button, .basic-form {
+    background-color: var(--red);
+}
+
+.blue-container, .blue-button, h2, .button-container button {
+    background-color: var(--blue);
+}
+
+.green-container {
+    background-color: var(--green);
+}
+
+.basic-form {
+    padding: 40px 0 40px 0;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    font-size: 25px;
+    margin: 20px;
+}
+
+.basic-form form, .sub-form div {
+    width : 80%;
+}
+
+input, select {
+    font-size: 18px;
+    margin-top: 10px;
+    width : 100%;
+    background-color: var(--brightred) ;
+    border-color: var(--black);
+    border-width: 1px;
+    border-style: solid;
+}
+
+.error {
+    color: var(--red);
+    font-weight: 600;
+    text-align: center;
+}
+
+.note {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+#recuperer-objet-perdu-page {
+    width: 380px;
+}
+
+/*####################
+#     RESPONSIVE     #
+####################*/
+
+@media (max-width: 850px) {
+    .home-buttons {
+        height: auto;
+        flex-direction: column; 
+        margin-bottom: 50px;
+    }
+
+    .home-button {
+        width: 80vw;
+        font-size: 30px;
+    }
+
+    footer {
+        font-size: 10px;
+    }
+
+    .sub-form-container {
+        flex-direction: column;
+    }
+
+    .h2-container {
+        flex-direction: column;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    #recuperer-objet-perdu-page {
+        width: 370px;
+    }
+
+    .error {
+        font-size: 19px;
+    }
+}
+
+/*#############
+#     END     #
+#############*/
