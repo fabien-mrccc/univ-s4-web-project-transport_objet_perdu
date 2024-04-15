@@ -16,6 +16,18 @@ We will develop a web application that allows users to quickly retrieve the cont
 </ul>
 In accordance with the MVC model, our first goal is to allow transportation companies to register on the site so that they can provide the necessary information for the application's mission. In a second phase, a user who has lost something will be able to fill in a form to select the desired transportation company in order to obtain the contact information of the relevant service.
 
+## User Guide
+<ol>
+  <li>Install conda: https://docs.anaconda.com/free/miniconda/</li>
+  <li>Create an environment (conda create env_name -> conda activate env_name) with:
+    <ol>
+      <li>Flask (conda install flask)</li>
+      <li>requests (conda install requests)</li>
+    </ol>
+  <li>Run your flask application (flask run --debug)</li>
+  <li>Use the link provided by flask in your console, for example "Running on http://127.0.0.1:5000"</li>
+</ol>
+
 ## Preview
 ### Route "/"
 <img alt="route / screenshot" src="https://file.notion.so/f/f/b09fcc6c-df16-46f2-8a4f-d37dba6294b1/4501e2d8-af3b-4a27-884d-c53ec9d12b0a/02c29fe0-61b2-49b3-a91b-dd776bee2c28.png?id=959562ff-dd90-49e8-9644-173173190c4d&table=block&spaceId=b09fcc6c-df16-46f2-8a4f-d37dba6294b1&expirationTimestamp=1713312000000&signature=GqLSzwfQ6BZd5VO2I8hLXIiEI-97Qq1CHWcv_iy5agY&downloadName=Untitled.png" />
@@ -32,18 +44,6 @@ In accordance with the MVC model, our first goal is to allow transportation comp
 ### Route "/recuperer-objet-perdu"
 <img alt="route /recuperer-objet-perdu" src="https://file.notion.so/f/f/b09fcc6c-df16-46f2-8a4f-d37dba6294b1/9e0188c2-6138-49f1-a30c-2a38f7d6075b/Untitled.png?id=a7558ac2-4a13-4e50-8ff2-f019c70652ad&table=block&spaceId=b09fcc6c-df16-46f2-8a4f-d37dba6294b1&expirationTimestamp=1713268800000&signature=KVuriBLRNBHCxJ9jetInVfQYPZKrR0jC5QHIS-v1foU&downloadName=Untitled.png" />
 <img alt="route /recuperer-objet-perdu" src="https://file.notion.so/f/f/b09fcc6c-df16-46f2-8a4f-d37dba6294b1/f97abf47-5515-4996-b345-45384c093607/Untitled.png?id=48d6fa40-c2b3-449b-b74c-e5c45204bda2&table=block&spaceId=b09fcc6c-df16-46f2-8a4f-d37dba6294b1&expirationTimestamp=1713268800000&signature=TIApmfV8XTZoyEY9Q3XaQxiH_yS1Ph6GP-JLqzzgE_c&downloadName=Untitled.png" />
-
-## User Guide
-<ol>
-  <li>Install conda: https://docs.anaconda.com/free/miniconda/</li>
-  <li>Create an environment (conda create env_name -> conda activate env_name) with:
-    <ol>
-      <li>Flask (conda install flask)</li>
-      <li>requests (conda install requests)</li>
-    </ol>
-  <li>Run your flask application (flask run --debug)</li>
-  <li>Use the link provided by flask in your console, for example "Running on http://127.0.0.1:5000"</li>
-</ol>
 
 
 
