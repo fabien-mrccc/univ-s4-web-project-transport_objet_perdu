@@ -167,5 +167,5 @@ def get_recovery_sites():
                    c.Name AS City 
                    FROM ContactInformation ci 
                    JOIN TransportCompany tc ON ci.Company_ID = tc.ID 
-                   JOIN City c ON ci.City_ID = c.ID ORDER BY Name;""", all=True)
+                   JOIN City c ON ci.City_ID = c.ID ORDER BY LOWER(tc.Name);""", all=True)
 
