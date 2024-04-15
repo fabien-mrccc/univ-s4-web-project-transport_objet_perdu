@@ -29,7 +29,7 @@ function buttonEventListener(button, page, isPost=false) {
                 postRedirect(page);
             }
             else {
-                redirect(page);
+                getRedirect(page);
             }
         });
     }
@@ -44,7 +44,7 @@ function postRedirect(page) {
     form.submit();
 }
 
-function redirect(page) {
+function getRedirect(page) {
 
     window.location.href = page; 
 }

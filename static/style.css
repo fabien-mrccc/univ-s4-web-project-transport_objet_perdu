@@ -8,6 +8,8 @@
     --brightred: #f7efed;
     --gray: gray;
     --green: #4caf50;
+    --white: white;
+    --black: black;
 }
 
 body, html {
@@ -15,6 +17,8 @@ body, html {
     padding: 0;
     height: 100%;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: var(--white);
 }
 
 /*BEGIN HEADER*/
@@ -52,18 +56,19 @@ footer {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: white;
+    background-color: var(--white);
 }
 
-/*########################
-#         BUTTONS        #
-########################*/
+/*#################
+#     BUTTONS     #
+#################*/
 
 button {
-    border: 3px solid black;
-    color: white;
+    border: 3px solid var(--black);
     font-weight: 500;
     padding: 5px;
+    color: var(--white);
+    font-size: 20px;
 }
 
 button:hover {
@@ -71,7 +76,6 @@ button:hover {
 }
 
 .simple-size-button {
-    font-size: 20px;
     margin: 20px;
     border-radius: 5px;
 }
@@ -84,24 +88,19 @@ button:hover {
 
 .button-container button {
     border-radius: 7px;
-    font-size: 20px;
     font-weight: 600;
 }
 
-/*########################
-#  SHADOWS AND HR(LINES) #
-########################*/
+/*###############################
+#     SHADOWS AND HR(LINES)     #
+###############################*/
 
 hr {
     width: 80vw;
     margin-top: 20px;
 }
 
-.blue-box-shadow {
-    box-shadow: 6px 6px var(--blue);
-}
-
-.blue-box-shadow:hover {
+.blue-box-shadow, .blue-box-shadow:hover {
     box-shadow: 6px 6px var(--blue);
 }
 
@@ -109,11 +108,7 @@ hr {
     box-shadow: 3px 3px var(--blue);
 }
 
-.red-box-shadow {
-    box-shadow: 6px 6px var(--red);
-}
-
-.red-box-shadow:hover {
+.red-box-shadow, .red-box-shadow:hover {
     box-shadow: 6px 6px var(--red);
 }
 
@@ -121,9 +116,9 @@ hr {
     box-shadow: 3px 3px var(--red);
 }
 
-/*########################
-#        HOME PAGE       #
-########################*/
+/*###################
+#     HOME PAGE     #
+###################*/
 
 .home-buttons {
     height: 70%;
@@ -176,13 +171,13 @@ h2 {
 
 .feedback {
     font-weight: 600;
-    font-size: 20px;
     text-align: center;
+    color: var(--green)
 }
 
-/*########################
-#      GENERAL FORM      #
-########################*/
+/*######################
+#     GENERAL FORM     #
+######################*/
 
 .sub-form-container {
     display: flex;
@@ -196,7 +191,6 @@ h2 {
     justify-content: flex-start;
     align-items: center;
     border-radius: 20px;
-    color: white;
     font-size: 25px; 
     margin: 20px;
 }
@@ -221,7 +215,6 @@ h2 {
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    color: white;
     font-size: 25px;
     margin: 20px;
 }
@@ -235,7 +228,7 @@ input, select {
     margin-top: 10px;
     width : 100%;
     background-color: var(--brightred) ;
-    border-color: black;
+    border-color: var(--black);
     border-width: 1px;
     border-style: solid;
 }
@@ -243,7 +236,6 @@ input, select {
 .error {
     color: var(--red);
     font-weight: 600;
-    font-size: 20px;
     text-align: center;
 }
 
@@ -256,9 +248,9 @@ input, select {
     width: 380px;
 }
 
-/*########################
-#        RESPONSIVE      #
-########################*/
+/*####################
+#     RESPONSIVE     #
+####################*/
 
 @media (max-width: 850px) {
     .home-buttons {
@@ -287,8 +279,16 @@ input, select {
     h2 {
         text-align: center;
     }
+
+    #recuperer-objet-perdu-page {
+        width: 370px;
+    }
+
+    .error {
+        font-size: 19px;
+    }
 }
 
-/*########################
-#           END          #
-########################*/
+/*#############
+#     END     #
+#############*/
