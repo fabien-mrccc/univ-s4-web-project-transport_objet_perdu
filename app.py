@@ -1,12 +1,12 @@
-from flask import Flask, session, request, redirect, render_template, url_for
+from flask import Flask, session, request, redirect, render_template
 import data_model as model
 import requests
 
 app = Flask(__name__)
 app.secret_key = b'6dbb6b3863634aa6a72270de16df48e666f2564fddcc5fe3c27effe4393a7f4b'
 
-apiUrl = "https://geo.api.gouv.fr/departements"
-response = requests.get(apiUrl)
+api_url = "https://geo.api.gouv.fr/departements"
+response = requests.get(api_url)
 
 departments = response.json()
 
@@ -68,9 +68,9 @@ def register_get():
                            departments = departments)
 
 
-########################
-#     POST ROUTES      #
-########################
+#########################
+#      POST ROUTES      #
+#########################
 
 @app.post('/inscription-compagnie-transport')
 def register_post():
@@ -153,9 +153,9 @@ def recover_lost_object_post():
                            contact_info=updated_contact_info)
 
 
-#####################
-# Utility functions #
-#####################
+###############################
+#      Utility functions      #
+###############################
 
 def update_contact_info(contact_info, error_message):
 
